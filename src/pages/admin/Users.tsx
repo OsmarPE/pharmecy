@@ -17,7 +17,7 @@ export default function Users() {
       </header>
       <div className="flex justify-end">
         <Modal>
-          <ModalButton variant="notion"> <CirclePlus /> Agregar</ModalButton>
+          <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
           <ModalContent title="Agregar Usuario" description="Crea un nuevo usuario">
             <div>
               <FormUser />

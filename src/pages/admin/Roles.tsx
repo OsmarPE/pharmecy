@@ -15,7 +15,7 @@ export default function Roles() {
       </header>
       <div className="flex justify-end">
           <Modal>
-            <ModalButton variant="notion"> <CirclePlus /> Agregar</ModalButton>
+            <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
             <ModalContent title="Agregar rol" description="Crear un nuevo rol para los usuarios"> 
               <FormCategory />
             </ModalContent>

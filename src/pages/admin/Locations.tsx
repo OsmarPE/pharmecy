@@ -15,7 +15,7 @@ export default function Locations() {
       </header>
       <div className="mb-4 flex justify-end">
         <Modal>
-          <ModalButton variant="notion"> <CirclePlus/> Agregar</ModalButton>
+          <ModalButton variant="dashboard"> <CirclePlus/> Agregar</ModalButton>
           <ModalContent title="Agregar sucursal" description="Crea una nueva sucursal">
             <FormCategory />
           </ModalContent>

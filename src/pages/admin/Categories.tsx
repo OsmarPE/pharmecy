@@ -2,7 +2,7 @@ import CategoryCard from "@/components/admin/categories/CategoryCard";
 import FormCategory from "@/components/admin/categories/FormCategory";
 import RemoveCategory from "@/components/admin/categories/RemoveCategory";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
-import { Plus } from "lucide-react";
+import { CirclePlus, Plus } from "lucide-react";
 
 
 export default function Categories() {
@@ -16,7 +16,7 @@ export default function Categories() {
           </p>
         </div>
           <Modal>
-              <ModalButton variant="notion"> <Plus /> Agregar</ModalButton>
+              <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
               <ModalContent title="Agregar categoría" description="Crea una nueva categoría">
                 <FormCategory />
               </ModalContent>

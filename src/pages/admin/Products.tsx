@@ -17,7 +17,7 @@ export default function Products() {
       <div className="mb-4 mt-6 flex justify-end gap-4">
         <Button variant={'notion'}> <CloudUpload /> Subir Excel</Button>
         <Button variant={'notion'}> <Download /> Exportar </Button>
-        <Button variant={'notion'}> <CirclePlus /> Agregar</Button>
+        <Button variant={'dashboard'}> <CirclePlus /> Agregar</Button>
       </div>
       <div className="mt-4">
         <DataTable columns={productsColumns} data={productsData} />

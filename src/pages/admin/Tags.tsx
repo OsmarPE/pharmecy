@@ -16,7 +16,7 @@ export default function Tags() {
       </header>
       <div className="flex justify-end">
         <Modal>
-          <ModalButton variant="notion"> <CirclePlus /> Agregar</ModalButton>
+          <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
           <ModalContent title="Agregar Etiqueta" description="Crea una nueva etiqueta">
             <FormTags />
           </ModalContent>
