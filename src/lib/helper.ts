@@ -37,3 +37,15 @@ export const categories = [
    {value: 'sabado', label: 'Sábado'},
    {value: 'domingo', label: 'Domingo'}
   ];
+
+  export const imagesBanner = [
+    {
+      src:"https://www.emeritafarmacias.com/wp-content/uploads/METRORUBORIL_AZ_CRA_0225.jpg"
+    },
+    {
+      src:"https://www.emeritafarmacias.com/wp-content/uploads/METRORUBORIL_AZ_CRA_0225.jpg"
+    },
+    {
+      src:"https://www.emeritafarmacias.com/wp-content/uploads/METRORUBORIL_AZ_CRA_0225.jpg"
+    }
+  ]
