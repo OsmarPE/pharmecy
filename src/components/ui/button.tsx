@@ -20,6 +20,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         notion:"border border-input bg-background shadow hover:bg-accent hover:text-accent-foreground",
+        dashboard:"bg-cyan-800 text-primary-foreground  hover:bg-cyan-700",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

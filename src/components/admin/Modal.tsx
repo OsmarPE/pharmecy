@@ -49,7 +49,7 @@ export function ModalContent({ children, title, description , changeOpen }: { ch
     )
 }
 
-export function ModalButton({ children, className = '', variant = 'default' }: { children: React.ReactNode, className?: string, variant?:  "secondary" | "outline" | "ghost" | "link" | "default" | "destructive"   | "notion"  }) {
+export function ModalButton({ children, className = '', variant = 'default' }: { children: React.ReactNode, className?: string, variant?:  "secondary" | "outline" | "ghost" | "link" | "default" | "destructive"   | "notion"  | "dashboard" }) {
 
     const {  openModal } = useModal()
 

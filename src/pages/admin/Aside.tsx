@@ -82,7 +82,7 @@ export function Aside() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url} className="data-[active=true]:bg-white data-[active=true]:border-gray-200  ">
+                  <SidebarMenuButton asChild isActive={pathname === item.url} className="data-[active=true]:bg-white data-[active=true]:border-gray-200 data-[active=true]:text-cyan-800 data-[active=true]:shadow-[0_6px_5px_rgba(0,0,0,.02)]">
                     <NavLink to={item.url} >
                       <item.icon />
                       <span>{item.title}</span>

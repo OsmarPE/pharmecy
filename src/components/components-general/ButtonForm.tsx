@@ -4,11 +4,11 @@ import { Button } from "../ui/button";
 interface Props extends React.ComponentPropsWithoutRef<"button"> {
     children: React.ReactNode;
     loading?: boolean;
-    variant?:'default'|'destructive'|'outline'|'secondary'|'ghost'|'link',
+    variant?:'default'|'destructive'|'outline'|'secondary'|'ghost'|'link' | 'notion' | 'dashboard';
     loadingText?: string;
 }
 
-export default function ButtonForm({ children, loading = false,variant = 'default',loadingText = 'Cargando...', ...props }: Props) {
+export default function ButtonForm({ children, loading = false,variant = 'dashboard',loadingText = 'Cargando...', ...props }: Props) {
   
 
   return (
