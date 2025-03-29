@@ -1,72 +1,115 @@
+import BannerPagination from "@/components/admin/banner/BannerActions";
+import BannerAside from "@/components/admin/banner/BannerAside";
+import BannerAsideImage from "@/components/admin/banner/BannerAsideImage";
+import BannerGallery from "@/components/admin/banner/BannerGallery";
+import BannerHeader from "@/components/admin/banner/BannerHeader";
 import BannerImage from "@/components/admin/banner/BannerImage";
 import BannerPlaceholder from "@/components/admin/banner/BannerPlaceholder";
-import FormBanner from "@/components/admin/banner/FormBanner";
-import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
 import { Button } from "@/components/ui/button";
 import { imagesBanner } from "@/lib/helper";
-import { AlignJustify, ChevronLeft, ChevronRight, CirclePlus, Pencil, Plus } from "lucide-react";
-import { useState } from "react";
+import { DragEvent, useMemo, useState } from "react";
 
 export default function Banner() {
 
+    const [data, setdata] = useState(() => imagesBanner)
+    const [dataBackup, setdataBackup] = useState(() => imagesBanner)
     const [indexImg, setIndexImg] = useState<number | null>(null)
     const [modeEdit, setModeEdit] = useState(false)
+    const [indexCurrent, setIndexCurrent] = useState<null | number>(null);
+    const [indexR, setindexR] = useState<null | number>(null);
+
+    const onDragStart = (_e: DragEvent<HTMLElement>, index: number) => {
+        if(!modeEdit) return
+        setIndexCurrent(index)
+    };
+    const onDragEnter = (e: DragEvent<HTMLElement>, index: number) => {
+        e.preventDefault();
+        e.dataTransfer.effectAllowed = 'move';
+        if(!modeEdit) return
+        setindexR(index)
+
+    };
+    const onDragLeave = (e: DragEvent<HTMLElement>) => {
+        e.preventDefault();
+    };
+    const onDragOver = (e: DragEvent<HTMLElement>) => {
+        e.preventDefault();
+    };
+    const onDrop = (e: DragEvent<HTMLElement>) => {
+        e.preventDefault()
+        if(!modeEdit) return
+        e.currentTarget.classList.remove('border')
+        if (indexCurrent === indexR) {
+            setIndexCurrent(null)
+            return
+        }
+
+        const array = [...data]
+        const item = array[indexCurrent as number]
+        console.log(indexCurrent)
+        array.splice(indexCurrent as number, 1)
+
+        array.splice(indexR as number, 0, item)
+        setdata([...array])
+        setIndexCurrent(null)
+        setindexR(null)
+        setIndexImg(indexR)
+
+    };
+
+    const onSubmit = () => {
+        const arraySorted = data.map((item, i) => ({ ...item, order: i + 1 }))
+        setdataBackup([...data])
+        setModeEdit(false)
+    }
+
+    const handleCancel = () => {
+        setdata([...dataBackup])
+        setModeEdit(false)
+    }
+
+    const isDifferentData = useMemo(() => dataBackup.some((item, i) => item.src !== data[i].src), [dataBackup, data])
+
 
     return (
         <div className='max-w-6xl'>
-            <header className="mb-4 flex justify-between items-center gap-4">
-                <div>
-                    <h1 className="font-medium text-xl">Banners</h1>
-                    <p className="text-gray-400 text-sm">
-                        Aquí podrás gestionar todos los banners de tu negocio. Puedes crear, editar y eliminar banners.
-                    </p>
-                </div>
-                <div className="flex gap-4">
-                    {!modeEdit && <Button onClick={() => setModeEdit(true)} variant={'outline'} ><Pencil /> Editar </Button>}
-                    {modeEdit && <Button onClick={() => setModeEdit(false)} variant={'outline'}> Cancelar </Button>}
-                    {!modeEdit && (
-                        <Modal>
-                            <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
-                            <ModalContent title="Agregar imagen" description="Crea una nueva imagen">
-                                <FormBanner />
-                            </ModalContent>
-                        </Modal>
-                    )}
-                </div>
-            </header>
+            <BannerHeader modeEdit={modeEdit} setModeEdit={setModeEdit} />
             <div className="grid grid-cols-[1fr_auto_250px] gap-6 items-start">
                 <div>
-                    <div className="border-2 border-gray-300 rounded-lg p-2 bg-white border-dashed aspect-video">
-                        {indexImg === null ? (
-                            <BannerPlaceholder />
-                        ) : (
-                            <BannerImage src="https://www.emeritafarmacias.com/wp-content/uploads/METRORUBORIL_AZ_CRA_0225.jpg" />
-                        )}
-                    </div>
-                   {indexImg !== null && <div className="flex items-center justify-center gap-4 mt-4">
-                        <Button onClick={() => setIndexImg(indexImg - 1)} variant={'outline'} className="size-12" disabled={indexImg === 0}>
-                             <ChevronLeft />
-                        </Button>
-                       <Button onClick={() => setIndexImg(indexImg + 1)} variant={'outline'} className="size-12" disabled={indexImg === imagesBanner.length - 1}>
-                             <ChevronRight />
-                        </Button>
-                    </div>}
+                    <BannerGallery>
+                        {indexImg === null ? <BannerPlaceholder /> : <BannerImage src={data[indexImg].src} />}
+                    </BannerGallery>
+                    {indexImg !== null && <BannerPagination index={indexImg} setIndex={setIndexImg} length={data.length} />}
                 </div>
                 <div className="w-[1px] h-full bg-gray-200"></div>
-                <aside className="grid gap-4 ">
+                <BannerAside>
                     <div className={`space-y-4 ${modeEdit ? ' border border-gray-300 p-2 rounded-xl' : ''}`}>
                         {
-                            imagesBanner.map((image, index) => (
-                                <figure role="button" onClick={() => setIndexImg(index)} key={index} className={`relative cursor-pointer rounded-md p-1 bg-white border-2  h-32 border-dashed hover:border-cyan-700  transition-colors duration-300 group/img ${index === indexImg ? 'border-cyan-700' : 'border-gray-300'}`}>
-                                    <img className="w-full h-full object-cover rounded-md " src={image.src} alt="" />
-                                    {modeEdit && <Button size={'icon'} variant={'dashboard'} className="absolute top-2 right-2 opacity-0 transition-opacity group-hover/img:opacity-100">
-                                        <AlignJustify />
-                                    </Button>}
-                                </figure>
+                            data.map((image, index) => (
+                                <BannerAsideImage
+                                    index={index}
+                                    src={image.src}
+                                    modeEdit={modeEdit}
+                                    setIndexImg={setIndexImg}
+                                    indexImg={indexImg}
+                                    onDragStart={onDragStart}
+                                    onDragEnter={onDragEnter}
+                                    onDragLeave={onDragLeave}
+                                    onDragOver={onDragOver}
+                                    onDrop={onDrop}
+                                />
                             ))
                         }
                     </div>
-                </aside>
+                    {
+                        isDifferentData && (
+                            <div className="grid gap-3">
+                                <Button onClick={onSubmit} variant={'dashboard'}>Guardar Cambios</Button>
+                                <Button onClick={handleCancel} variant={'outline'}>Cancelar</Button>
+                            </div>
+                        )
+                    }
+                </BannerAside>
             </div>
         </div>
     )

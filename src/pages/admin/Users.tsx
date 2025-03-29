@@ -1,12 +1,17 @@
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
+import EditUser from "@/components/admin/user/EditUser";
 import FormUser from "@/components/admin/user/FormUser";
 import RemoveUser from "@/components/admin/user/RemoveUser";
+import { useIdParams } from "@/hooks/use-idparams";
 import { usersColumns, usersData } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
 import { CirclePlus } from "lucide-react";
 
 
 export default function Users() {
+  
+  const { id } = useIdParams("editid")
+
   return (
     <div className="max-w-5xl">
       <header className="mb-4">
@@ -29,6 +34,7 @@ export default function Users() {
           <DataTable columns={usersColumns} data={usersData} />
       </div>
       <RemoveUser />
+      {id &&<EditUser />}
     </div>
   )
 }

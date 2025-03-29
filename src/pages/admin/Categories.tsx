@@ -1,11 +1,16 @@
 import CategoryCard from "@/components/admin/categories/CategoryCard";
+import EditCategory from "@/components/admin/categories/EditCategory";
 import FormCategory from "@/components/admin/categories/FormCategory";
 import RemoveCategory from "@/components/admin/categories/RemoveCategory";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
-import { CirclePlus, Plus } from "lucide-react";
+import { useIdParams } from "@/hooks/use-idparams";
+import { CirclePlus } from "lucide-react";
 
 
 export default function Categories() {
+
+  const { id } = useIdParams("editid")
+
   return (
     <div className="max-w-5xl">
       <header className="flex  justify-between">
@@ -28,6 +33,7 @@ export default function Categories() {
           <CategoryCard />
       </div>
       <RemoveCategory />
+      {id && <EditCategory />}
     </div>
   )
 }

@@ -1,11 +1,16 @@
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
+import EditTags from "@/components/admin/tags/EditTags";
 import FormTags from "@/components/admin/tags/FormTags";
 import RemoveTag from "@/components/admin/tags/RemoveTag";
+import { useIdParams } from "@/hooks/use-idparams";
 import { tagsColumns, tagsData } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
-import { CirclePlus, Plus } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 
 export default function Tags() {
+  
+  const { id } = useIdParams("editid")
+
   return (
     <div className="max-w-5xl">
       <header className=" mb-4">
@@ -26,6 +31,7 @@ export default function Tags() {
         <DataTable columns={tagsColumns} data={tagsData} />
       </div>
       <RemoveTag />
+      {id && <EditTags />}
     </div>
   )
 }

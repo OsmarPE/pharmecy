@@ -4,6 +4,7 @@ interface Props {
 }
 export default function BannerImage({ src }: Props) {
   return (
-    <img className="w-full h-full object-cover rounded-lg" src={src} alt="imagen de banner" />
+    
+      <img className="w-full rounded-lg" src={src} alt="imagen de banner" />
   )
 }

@@ -125,3 +125,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+.banner-aside-img.drag-over{
+  border: 2px dashed #a4a4a4;
+}
+
+
+.banner-aside-img.opacity{
+  opacity: .5;
+}
+
+.banner-aside-img.border{
+  border-color: #ccc;
+}
+

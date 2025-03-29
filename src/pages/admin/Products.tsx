@@ -1,3 +1,4 @@
+import RemoveProduct from "@/components/admin/products/RemoveProduct";
 import { Button } from "@/components/ui/button";
 import { productsColumns, productsData } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
@@ -22,6 +23,7 @@ export default function Products() {
       <div className="mt-4">
         <DataTable columns={productsColumns} data={productsData} />
       </div>
+      <RemoveProduct />
     </div>
   )
 }

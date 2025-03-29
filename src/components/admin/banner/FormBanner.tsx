@@ -9,12 +9,6 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import DragImageInput from "../drag-and-drop/DragImageInput"
 
-interface imagenType {
-    url: string,
-    name: string,
-    size: number,
-    type: string
-}
 
 export default function FormBanner() {
 
@@ -30,9 +24,8 @@ export default function FormBanner() {
     const onSubmit = (data: z.infer<typeof bannerValidationSchema>) => {
         const formData = new FormData();
         formData.append("file", data.name);
-        console.log(data);
+        closeModal();
         
-
         // fetch("http://localhost:3000/api/banner", {
         //     method: "POST",
         //     body: formData

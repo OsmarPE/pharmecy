@@ -22,8 +22,10 @@ export default function CategoryCard() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Acciones</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <Pencil width={16} height={16} /> Editar
+          <DropdownMenuItem asChild>
+            <Link to={`/admin/categories?editid=1`}>
+              <Pencil width={16} height={16} /> Editar
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link to={`/admin/categories?removeid=1`}>

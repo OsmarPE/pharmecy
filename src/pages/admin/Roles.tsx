@@ -1,10 +1,16 @@
 import FormCategory from "@/components/admin/categories/FormCategory";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
+import EditRoles from "@/components/admin/roles/EditRoles";
+import RemoveRoles from "@/components/admin/roles/RemoveRoles";
+import { useIdParams } from "@/hooks/use-idparams";
 import { rolesColumns, rolesData } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
 import { CirclePlus, Plus } from "lucide-react";
 
 export default function Roles() {
+
+  const { id } = useIdParams("editid")
+
   return (
     <div className="max-w-5xl">
       <header className="mb-4">
@@ -24,6 +30,8 @@ export default function Roles() {
       <div className="mt-4">
         <DataTable columns={rolesColumns} data={rolesData} />
       </div>
+      <RemoveRoles />
+      {id && <EditRoles />}
     </div>
   )
 }

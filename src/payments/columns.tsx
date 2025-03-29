@@ -92,8 +92,11 @@ export const rolesColumns: ColumnDef<PaymentRole>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Acciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Pencil width={16} height={16} /> Editar
+            <DropdownMenuItem asChild>
+              <Link to={`/admin/roles?editid=${payment.id}`}>
+                <Pencil width={16} height={16} /> Editar
+            
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link to={`/admin/roles?removeid=${payment.id}`}>
@@ -151,8 +154,11 @@ export const tagsColumns: ColumnDef<PaymentTag>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Acciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Pencil width={16} height={16} /> Editar
+            <DropdownMenuItem asChild>
+              <Link to={`/admin/tags?editid=${payment.id}`}>
+                <Pencil width={16} height={16} /> Editar
+            
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link to={`/admin/tags?removeid=${payment.id}`}>
@@ -236,8 +242,10 @@ export const categoriesColumns: ColumnDef<PaymentCategory>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Acciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Pencil width={16} height={16} /> Editar
+            <DropdownMenuItem asChild>
+              <Link to={`/admin/categories?editid=${payment.id}`}>
+                <Pencil width={16} height={16} /> Editar
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link to={`/admin/categories?removeid=${payment.id}`}>
@@ -332,8 +340,10 @@ export const usersColumns: ColumnDef<PaymentUser>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Acciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Pencil width={16} height={16} /> Editar
+            <DropdownMenuItem asChild>
+              <Link to={`/admin/users?editid=${payment.id}`}>
+                <Pencil width={16} height={16} /> Editar
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link to={`/admin/users?removeid=${payment.id}`}>
@@ -532,8 +542,10 @@ export const locationsColumns: ColumnDef<PaymentLocation>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Acciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Pencil width={16} height={16} /> Editar
+            <DropdownMenuItem asChild>
+              <Link to={`/admin/locations?editid=${payment.id}`}>
+                <Pencil width={16} height={16} /> Editar
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>              
               <Link to={`/admin/locations?removeid=${payment.id}`}>

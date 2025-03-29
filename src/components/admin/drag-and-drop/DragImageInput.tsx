@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 interface Props {
     message?: string;
     onChangeValue?:(value: string) => void;
-    value?: string;
+    value?: imagenType;
 }
 
 
@@ -23,7 +23,7 @@ export default function DragImageInput({  message = '' , onChangeValue, value }:
 
 
     const [isDragging, setIsDragging] = useState(false);
-    const [imagen, setImagen] = useState<imagenType | null>(null);
+    const [imagen, setImagen] = useState<imagenType | null>(value ? { ...value } : null)
     const fileRef = useRef<HTMLInputElement>(null);
 
     const onDragEnter = (e: DragEvent<HTMLDivElement>) => {
