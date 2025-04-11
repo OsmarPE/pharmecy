@@ -18,7 +18,6 @@ export default function BannerHeader({ modeEdit, setModeEdit }: Props) {
             </div>
             <div className="flex gap-4">
                 {!modeEdit && <Button onClick={() => setModeEdit(true)} variant={'outline'} ><Pencil /> Editar </Button>}
-                {modeEdit && <Button onClick={() => setModeEdit(false)} variant={'outline'}> Cancelar </Button>}
                 {!modeEdit && (
                     <Modal>
                         <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>

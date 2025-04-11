@@ -4,9 +4,9 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ButtonForm from "@/components/components-general/ButtonForm";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { deleteRole } from "@/services/rol.services";
+import { deleteBranch } from "@/services/branch.services";
 
-export default function RemoveRoles() {
+export default function RemoveBranch() {
 
    const [searchParams] = useSearchParams()
    const navigate = useNavigate()
@@ -18,9 +18,9 @@ export default function RemoveRoles() {
    const handleremoveItem = async() => {
            
     try {
-        const data = await deleteRole(+id)
+        const data = await deleteBranch(+id)
         toast.success(data)
-        client.invalidateQueries({queryKey: ['roles']})
+        client.invalidateQueries({queryKey: ['branchs']})
     } catch (error) {
         console.log(error)
     } finally{
@@ -32,7 +32,7 @@ export default function RemoveRoles() {
 
   return (
     <Modal defaultState={true} >
-        <ModalContent changeOpen={handleCancel} title="Eliminar rol" description="¿Estás seguro de que quieres eliminar este rol?">
+        <ModalContent changeOpen={handleCancel} title="Eliminar Sucursal" description="¿Estás seguro de que quieres eliminar esta sucursal?">
             <div className="flex justify-end items-center mt-6 gap-4">
                 <Button variant={'outline'} onClick={handleCancel}>Cancelar</Button>
                 <ButtonForm variant={'destructive'} onClick={handleremoveItem}> Eliminar</ButtonForm>

@@ -4,12 +4,16 @@ import FormCategory from "@/components/admin/categories/FormCategory";
 import RemoveCategory from "@/components/admin/categories/RemoveCategory";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
 import { useIdParams } from "@/hooks/use-idparams";
+import { getCategories } from "@/services/category.services";
+import { useQuery } from "@tanstack/react-query";
 import { CirclePlus } from "lucide-react";
 
 
 export default function Categories() {
 
   const { id } = useIdParams("editid")
+
+  const { data } = useQuery({ queryKey: ['categories'], queryFn: getCategories})
 
   return (
     <div className="max-w-5xl">
@@ -28,9 +32,10 @@ export default function Categories() {
           </Modal>
       </header>
       <div className="mt-6 grid grid-cols-3 gap-4">
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
+          { data?.map((category, index) => (
+            <CategoryCard key={index} {...category} />
+          ))}
+       
       </div>
       <RemoveCategory />
       {id && <EditCategory />}

@@ -5,9 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatTextSchedule({ dayFrom, dayTo, timeFrom, timeTo }: { dayFrom?: string, dayTo?: string, timeFrom?: string, timeTo?: string }) {
+export function formatTextSchedule({ dayFrom, dayTo, timeIn, timeOut }: { dayFrom?: string, dayTo?: string, timeIn?: string, timeOut?: string }) {
 
-  const time = (timeFrom && timeTo) ? `${formatHourWithAmPm(timeFrom)} - ${formatHourWithAmPm(timeTo)}` : 'Cerrado'
+  const time = (timeIn && timeOut) ? `${formatHourWithAmPm(timeIn)} - ${formatHourWithAmPm(timeOut)}` : 'Cerrado'
 
   if(!dayTo){
     return `${dayFrom} • ${time}`

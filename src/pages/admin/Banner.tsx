@@ -19,13 +19,13 @@ export default function Banner() {
     const [indexR, setindexR] = useState<null | number>(null);
 
     const onDragStart = (_e: DragEvent<HTMLElement>, index: number) => {
-        if(!modeEdit) return
+        if (!modeEdit) return
         setIndexCurrent(index)
     };
     const onDragEnter = (e: DragEvent<HTMLElement>, index: number) => {
         e.preventDefault();
         e.dataTransfer.effectAllowed = 'move';
-        if(!modeEdit) return
+        if (!modeEdit) return
         setindexR(index)
 
     };
@@ -37,7 +37,7 @@ export default function Banner() {
     };
     const onDrop = (e: DragEvent<HTMLElement>) => {
         e.preventDefault()
-        if(!modeEdit) return
+        if (!modeEdit) return
         e.currentTarget.classList.remove('border')
         if (indexCurrent === indexR) {
             setIndexCurrent(null)
@@ -101,14 +101,14 @@ export default function Banner() {
                             ))
                         }
                     </div>
-                    {
-                        isDifferentData && (
-                            <div className="grid gap-3">
-                                <Button onClick={onSubmit} variant={'dashboard'}>Guardar Cambios</Button>
-                                <Button onClick={handleCancel} variant={'outline'}>Cancelar</Button>
-                            </div>
-                        )
-                    }
+                    <div className="grid gap-3">
+                        {
+                            isDifferentData && <Button onClick={onSubmit} variant={'dashboard'}>Guardar Cambios</Button>
+                            
+                        }
+                        
+                        {modeEdit && <Button onClick={handleCancel} variant={'outline'}>Cancelar</Button>}
+                    </div>
                 </BannerAside>
             </div>
         </div>

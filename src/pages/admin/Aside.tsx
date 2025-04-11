@@ -30,7 +30,7 @@ const items = [
   },
   {
     title: "Sucursales",
-    url: "/admin/locations",
+    url: "/admin/branchs",
     icon: MapPin,
   },
   {

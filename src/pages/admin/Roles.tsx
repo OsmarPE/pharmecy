@@ -1,15 +1,20 @@
-import FormCategory from "@/components/admin/categories/FormCategory";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
 import EditRoles from "@/components/admin/roles/EditRoles";
+import FormRoles from "@/components/admin/roles/FormRoles";
 import RemoveRoles from "@/components/admin/roles/RemoveRoles";
+import { useFetch } from "@/hooks/use-fetch";
 import { useIdParams } from "@/hooks/use-idparams";
-import { rolesColumns, rolesData } from "@/payments/columns";
+import { rolesColumns } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
-import { CirclePlus, Plus } from "lucide-react";
+import { getRol } from "@/services/rol.services";
+import { CirclePlus } from "lucide-react";
 
 export default function Roles() {
 
   const { id } = useIdParams("editid")
+
+  const { data } = useFetch({ queryKey: ['roles'], queryFn: getRol})
+
 
   return (
     <div className="max-w-5xl">
@@ -23,12 +28,12 @@ export default function Roles() {
           <Modal>
             <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
             <ModalContent title="Agregar rol" description="Crear un nuevo rol para los usuarios"> 
-              <FormCategory />
+              <FormRoles />
             </ModalContent>
           </Modal>
       </div>
       <div className="mt-4">
-        <DataTable columns={rolesColumns} data={rolesData} />
+        {data && <DataTable columns={rolesColumns} data={data} />}
       </div>
       <RemoveRoles />
       {id && <EditRoles />}

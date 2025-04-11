@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import Modal, { ModalContent } from "../Modal";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ButtonForm from "@/components/components-general/ButtonForm";
+import { useQueryClient } from "@tanstack/react-query";
+import { deleteTag } from "@/services/tags.services";
+import { toast } from "sonner";
 
 export default function RemoveTag() {
 
@@ -12,9 +15,18 @@ export default function RemoveTag() {
 
    if(!id) return null
 
-   const handleremoveItem = () => {
-       console.log(id)
-       handleCancel()
+   const client = useQueryClient()
+
+   const handleremoveItem = async() => {
+    try {
+        const data = await deleteTag(+id)
+        toast.success(data)
+        client.invalidateQueries({queryKey: ['tags']})
+    } catch (error) {
+        console.log(error)
+    } finally{
+        handleCancel()
+    }
    }
    const handleCancel = () => navigate(pathname,{replace: true})
    

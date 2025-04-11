@@ -5,11 +5,15 @@ import RemoveTag from "@/components/admin/tags/RemoveTag";
 import { useIdParams } from "@/hooks/use-idparams";
 import { tagsColumns, tagsData } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
+import { getTags } from "@/services/tags.services";
+import { useQuery } from "@tanstack/react-query";
 import { CirclePlus } from "lucide-react";
 
 export default function Tags() {
   
   const { id } = useIdParams("editid")
+
+  const { data } = useQuery({ queryKey: ['tags'], queryFn: getTags})
 
   return (
     <div className="max-w-5xl">
@@ -28,7 +32,7 @@ export default function Tags() {
         </Modal>
       </div>
       <div className="mt-4">
-        <DataTable columns={tagsColumns} data={tagsData} />
+      {data && <DataTable columns={tagsColumns} data={data} />}
       </div>
       <RemoveTag />
       {id && <EditTags />}

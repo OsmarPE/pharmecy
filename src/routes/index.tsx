@@ -19,11 +19,12 @@ const CategoriesDash = lazy(() => import('@/pages/admin/Categories'))
 const UsersDash = lazy(() => import('@/pages/admin/Users'))
 const RolesDash = lazy(() => import('@/pages/admin/Roles'))
 const TagsDash = lazy(() => import('@/pages/admin/Tags'))
-const LocationDash = lazy(() => import('@/pages/admin/Locations'))
 const ProductsDash = lazy(() => import('@/pages/admin/Products'))
 const SchedulesDash = lazy(() => import('@/pages/admin/Schedules'))
-const LocationDetails = lazy(() => import('@/pages/admin/LocationDetails'))
+const BranchDash = lazy(() => import('@/pages/admin/Branch'))
+const BranchAdd = lazy(() => import('@/pages/admin/BranchDetails'))
 const Banner = lazy(() => import('@/pages/admin/Banner'))
+const BranchEdit = lazy(() => import('@/pages/admin/BranchEdit'))
 export default function index() {
 
   const routes = createBrowserRouter([
@@ -100,8 +101,8 @@ export default function index() {
           path:'tags',
         },
         {
-          element: <LocationDash />,
-          path:'locations',
+          element: <BranchDash />,
+          path:'branchs',
         },
         {
           element: <ProductsDash />,
@@ -112,8 +113,12 @@ export default function index() {
           element: <SchedulesDash />,
         },
         {
-          path:'locations/:id',
-          element: <LocationDetails />,
+          path:'branchs/add',
+          element: <BranchAdd />,
+        },
+        {
+          path:'branchs/edit/:id',
+          element: <BranchEdit />,
         },
         {
           path:'banner',

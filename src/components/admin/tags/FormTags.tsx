@@ -3,15 +3,24 @@ import InputForm from "@/components/components-general/InputForm"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { useModal } from "@/hooks/use-modal"
+import { createTag } from "@/services/tags.services"
 import { tagsValidationSchema } from "@/validation/tags"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
 
 export default function FormTags() {
 
     const {  closeModal } = useModal()
+
+    const client = useQueryClient()
+
+    const mutation = useMutation({
+        mutationFn:createTag
+    })
 
     const form = useForm<z.infer<typeof tagsValidationSchema>>({
         resolver: zodResolver(tagsValidationSchema),
@@ -21,7 +30,13 @@ export default function FormTags() {
     })
     
     const onSubmit = (data: z.infer<typeof tagsValidationSchema>) => {
-        console.log(data)
+        mutation.mutate(data,{
+            onSuccess: (data) => {
+                toast.success(data)
+                client.invalidateQueries({queryKey: ['tags']})
+                closeModal()
+            }
+        })
     }
 
     return (
@@ -32,7 +47,7 @@ export default function FormTags() {
                 </div>
                 <div className="flex justify-end items-center mt-6 gap-4">
                     <Button type="button" variant="outline" onClick={closeModal}>Cancelar</Button>
-                    <ButtonForm type="submit">Agregar</ButtonForm>
+                    <ButtonForm type="submit">Editar</ButtonForm>
                 </div>
             </form>
         </Form>

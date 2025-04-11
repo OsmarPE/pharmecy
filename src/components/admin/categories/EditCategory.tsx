@@ -9,11 +9,18 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import Modal, { ModalContent } from "../Modal"
 import { useEffect } from "react"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { getCategory, updateCategory } from "@/services/category.services"
+import { toast } from "sonner"
 
 
 export default function EditCategory() {
 
     const { id, redirect } = useIdParams("editid")
+    const client = useQueryClient()
+
+    const { data } = useQuery({ queryKey: ['categories', id], queryFn: () => getCategory(id ? +id : 0) })
+
 
     const form = useForm<z.infer<typeof categoriesValidationSchema>>({
         resolver: zodResolver(categoriesValidationSchema),
@@ -22,14 +29,29 @@ export default function EditCategory() {
         },
     })
 
+    const mutation = useMutation({
+        mutationFn: (data: z.infer<typeof categoriesValidationSchema>) => updateCategory(id ? +id : 0, data),
+    });
+
+
     const onSubmit = (data: z.infer<typeof categoriesValidationSchema>) => {
-        console.log(data)
+        mutation.mutate(data, {
+            onSuccess: (message) => {
+                toast.success(message);
+                client.invalidateQueries({ queryKey: ['categories'] });
+                redirect();
+            },
+            onError: (error) => {
+                toast.error("Error al actualizar la categoría");
+            }
+        })
     }
 
     useEffect(() => {
-        form.setValue("name", "Osmar")
-    
-    }, [])
+        if (data) {
+            form.setValue("name", data.name)
+        }
+    }, [data])
 
 
     return (
@@ -41,7 +63,7 @@ export default function EditCategory() {
                             <InputForm label="Nombre" name="name" control={form.control} placeholder="Nombre de la categoría" />
                             <div className="flex justify-end items-center mt-6 gap-4">
                                 <Button type="button" variant="outline" onClick={redirect}>Cancelar</Button>
-                                <ButtonForm type="submit">Agregar</ButtonForm>
+                                <ButtonForm type="submit">Editar</ButtonForm>
                             </div>
                         </form>
                     </Form>

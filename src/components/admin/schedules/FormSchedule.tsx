@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectValu
 import { Switch } from "@/components/ui/switch"
 import { useModal } from "@/hooks/use-modal"
 import { daysOptions, timeOptions } from "@/lib/helper"
+import { ScheduleForm } from "@/lib/types/schedule"
 import { formatTextSchedule } from "@/lib/utils"
 import { scheduleValidationSchema } from "@/validation/schedule"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -28,11 +29,11 @@ export default function FormSchedule() {
     const { closeModal } = useModal()
     const [onlyDay, setOnlyDay] = useState(false);
     const [notWorking, setNotWorking] = useState(false);
-    const [schedule, setSchedule] = useState<scheduleType>({
+    const [schedule, setSchedule] = useState<ScheduleForm>({
         dayFrom: '',
         dayTo: '',
-        timeFrom: '',
-        timeTo: ''
+        timeIn: '',
+        timeOut: ''
     })
     const [addSchedule, setaddSchedule] = useState(false);
 
@@ -58,16 +59,16 @@ export default function FormSchedule() {
        
         if(!schedule.dayFrom) return showError()
         if(!schedule.dayTo && !onlyDay) return showError()
-        if(!schedule.timeFrom && !notWorking) return showError()
-        if(!schedule.timeTo && !notWorking) return showError()
+        if(!schedule.timeIn && !notWorking) return showError()
+        if(!schedule.timeOut && !notWorking) return showError()
 
         if(onlyDay){
             newSchedule.dayTo = ''
         }
 
         if(notWorking){
-            newSchedule.timeFrom = ''
-            newSchedule.timeTo = ''
+            newSchedule.timeIn = ''
+            newSchedule.timeOut = ''
         }
         
         setValue('schedules', [...schedules, newSchedule])
@@ -100,8 +101,8 @@ export default function FormSchedule() {
         setSchedule({
             dayFrom: '',
             dayTo: '',
-            timeFrom: '',
-            timeTo: ''
+            timeIn: '',
+            timeOut: ''
         })
         clearErrors('schedules')
         clearErrors('root')

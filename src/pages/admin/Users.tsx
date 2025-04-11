@@ -3,14 +3,19 @@ import EditUser from "@/components/admin/user/EditUser";
 import FormUser from "@/components/admin/user/FormUser";
 import RemoveUser from "@/components/admin/user/RemoveUser";
 import { useIdParams } from "@/hooks/use-idparams";
-import { usersColumns, usersData } from "@/payments/columns";
+import { usersColumns } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
+import { getUsers } from "@/services/user.services";
+import { useQuery } from "@tanstack/react-query";
 import { CirclePlus } from "lucide-react";
 
 
 export default function Users() {
   
   const { id } = useIdParams("editid")
+  const { data } = useQuery({ queryKey: ['users'], queryFn: getUsers})
+
+  console.log(data)
 
   return (
     <div className="max-w-5xl">
@@ -31,7 +36,7 @@ export default function Users() {
         </Modal>
       </div>
       <div className="mt-4">
-          <DataTable columns={usersColumns} data={usersData} />
+        {data && <DataTable columns={usersColumns} data={data} />}
       </div>
       <RemoveUser />
       {id &&<EditUser />}

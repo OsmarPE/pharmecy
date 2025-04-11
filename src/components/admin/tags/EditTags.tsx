@@ -3,34 +3,55 @@ import InputForm from "@/components/components-general/InputForm"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { useIdParams } from "@/hooks/use-idparams"
-import { rolesValidationSchema } from "@/validation/roles"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import Modal, { ModalContent } from "../Modal"
+import { tagsValidationSchema } from "@/validation/tags"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { getTag, updateTag } from "@/services/tags.services"
+import { toast } from "sonner"
 
 
 export default function EditTags() {
 
     const { id, redirect } = useIdParams("editid")
+    const idCurrent = id ? +id : 0
 
-    const form = useForm<z.infer<typeof rolesValidationSchema>>({
-        resolver: zodResolver(rolesValidationSchema),
+    const client = useQueryClient()
+
+    const { data } = useQuery({ queryKey: ['tags', id], queryFn: () => getTag(idCurrent) })
+    const mutation = useMutation({
+        mutationFn: (data: z.infer<typeof tagsValidationSchema>) => updateTag(idCurrent, data),
+    });
+
+    const form = useForm<z.infer<typeof tagsValidationSchema>>({
+        resolver: zodResolver(tagsValidationSchema),
         defaultValues: {
             name: "",
         },
     })
 
-    const onSubmit = (data: z.infer<typeof rolesValidationSchema>) => {
-        console.log(data)
+    const onSubmit = (data: z.infer<typeof tagsValidationSchema>) => {
+        mutation.mutate(data, {
+            onSuccess: (message) => {
+                toast.success(message);
+                client.invalidateQueries({ queryKey: ['tags'] });
+                redirect();
+            },
+            onError: (error) => {
+                toast.error("Error al actualizar la etiqueta");
+            }
+        })
     }
 
     useEffect(() => {
 
-        form.setValue("name", "Osmar")
-
-    }, [])
+        if (data) {
+            form.setValue("name", data.name)
+        }
+    }, [data])
 
 
     return (
