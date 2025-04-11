@@ -5,7 +5,7 @@ import { Schedule } from "./schedule";
 export interface Branch {
     id: number;
     name: string;
-    schedules?: Schedule[];
+    schedule?: Schedule[];
     location?: Location;
     contact?: Contact;
 }
