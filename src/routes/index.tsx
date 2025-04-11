@@ -22,7 +22,7 @@ const TagsDash = lazy(() => import('@/pages/admin/Tags'))
 const ProductsDash = lazy(() => import('@/pages/admin/Products'))
 const SchedulesDash = lazy(() => import('@/pages/admin/Schedules'))
 const BranchDash = lazy(() => import('@/pages/admin/Branch'))
-const BranchAdd = lazy(() => import('@/pages/admin/BranchDetails'))
+const BranchAdd = lazy(() => import('@/pages/admin/BranchAdd'))
 const Banner = lazy(() => import('@/pages/admin/Banner'))
 const BranchEdit = lazy(() => import('@/pages/admin/BranchEdit'))
 export default function index() {

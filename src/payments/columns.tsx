@@ -399,7 +399,7 @@ export const branchsColumns: ColumnDef<Branch>[] = [
             <DropdownMenuLabel>Acciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link to={`/admin/branchs?editid=${payment.id}`}>
+              <Link to={`/admin/branchs/edit/${payment.id}`}>
                 <Pencil width={16} height={16} /> Editar
               </Link>
             </DropdownMenuItem>
