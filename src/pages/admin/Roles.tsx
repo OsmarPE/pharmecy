@@ -1,3 +1,4 @@
+import Loading from "@/components/admin/Loading";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
 import EditRoles from "@/components/admin/roles/EditRoles";
 import FormRoles from "@/components/admin/roles/FormRoles";
@@ -13,7 +14,7 @@ export default function Roles() {
 
   const { id } = useIdParams("editid")
 
-  const { data } = useFetch({ queryKey: ['roles'], queryFn: getRol})
+  const { data , isLoading} = useFetch({ queryKey: ['roles'], queryFn: getRol})
 
 
   return (
@@ -33,7 +34,8 @@ export default function Roles() {
           </Modal>
       </div>
       <div className="mt-4">
-        {data && <DataTable columns={rolesColumns} data={data} />}
+        {isLoading && <Loading />}
+        {!isLoading && data && <DataTable columns={rolesColumns} data={data} />}
       </div>
       <RemoveRoles />
       {id && <EditRoles />}

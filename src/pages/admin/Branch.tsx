@@ -1,4 +1,5 @@
 import RemoveBranch from "@/components/admin/branch/RemoveBranch";
+import Loading from "@/components/admin/Loading";
 import { Button } from "@/components/ui/button";
 import { branchsColumns } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
@@ -9,7 +10,7 @@ import { Link } from "react-router-dom";
 
 export default function Branch() {
 
-  const { data } = useQuery({ queryKey: ['branchs'], queryFn: getBranchs})
+  const { data , isLoading} = useQuery({ queryKey: ['branchs'], queryFn: getBranchs})
 
   return (
     <div className="max-w-6xl">
@@ -28,7 +29,8 @@ export default function Branch() {
         </Button>
       </div>
       <div>
-       { data && <DataTable columns={branchsColumns} data={data} />}
+         {isLoading && <Loading />}
+       {!isLoading && data && <DataTable columns={branchsColumns} data={data} />}
       </div>
       <RemoveBranch />
     </div>

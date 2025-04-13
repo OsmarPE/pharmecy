@@ -1,3 +1,4 @@
+import Loading from "@/components/admin/Loading";
 import RemoveProduct from "@/components/admin/products/RemoveProduct";
 import { Button } from "@/components/ui/button";
 import { productsColumns, productsData } from "@/payments/columns";
@@ -21,6 +22,7 @@ export default function Products() {
         <Button variant={'dashboard'}> <CirclePlus /> Agregar</Button>
       </div>
       <div className="mt-4">
+        {/* {isLoading && <Loading />} */}
         <DataTable columns={productsColumns} data={productsData} />
       </div>
       <RemoveProduct />

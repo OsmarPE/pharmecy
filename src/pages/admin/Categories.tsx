@@ -2,6 +2,7 @@ import CategoryCard from "@/components/admin/categories/CategoryCard";
 import EditCategory from "@/components/admin/categories/EditCategory";
 import FormCategory from "@/components/admin/categories/FormCategory";
 import RemoveCategory from "@/components/admin/categories/RemoveCategory";
+import Loading from "@/components/admin/Loading";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
 import { useIdParams } from "@/hooks/use-idparams";
 import { getCategories } from "@/services/category.services";
@@ -13,7 +14,7 @@ export default function Categories() {
 
   const { id } = useIdParams("editid")
 
-  const { data } = useQuery({ queryKey: ['categories'], queryFn: getCategories})
+  const { data, isLoading } = useQuery({ queryKey: ['categories'], queryFn: getCategories})
 
   return (
     <div className="max-w-5xl">
@@ -31,12 +32,12 @@ export default function Categories() {
               </ModalContent>
           </Modal>
       </header>
-      <div className="mt-6 grid grid-cols-3 gap-4">
+      {isLoading && <Loading className="mt-6" />}
+      {!isLoading && <div className="mt-6 grid grid-cols-3 gap-4">
           { data?.map((category, index) => (
             <CategoryCard key={index} {...category} />
           ))}
-       
-      </div>
+      </div>}
       <RemoveCategory />
       {id && <EditCategory />}
     </div>

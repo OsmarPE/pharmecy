@@ -1,3 +1,4 @@
+import Loading from "@/components/admin/Loading";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
 import EditUser from "@/components/admin/user/EditUser";
 import FormUser from "@/components/admin/user/FormUser";
@@ -13,7 +14,7 @@ import { CirclePlus } from "lucide-react";
 export default function Users() {
   
   const { id } = useIdParams("editid")
-  const { data } = useQuery({ queryKey: ['users'], queryFn: getUsers})
+  const { data, isLoading } = useQuery({ queryKey: ['users'], queryFn: getUsers})
 
   console.log(data)
 
@@ -36,7 +37,8 @@ export default function Users() {
         </Modal>
       </div>
       <div className="mt-4">
-        {data && <DataTable columns={usersColumns} data={data} />}
+        {isLoading && <Loading />}
+        {!isLoading && data && <DataTable columns={usersColumns} data={data} />}
       </div>
       <RemoveUser />
       {id &&<EditUser />}

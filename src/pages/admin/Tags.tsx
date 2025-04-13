@@ -1,3 +1,4 @@
+import Loading from "@/components/admin/Loading";
 import Modal, { ModalButton, ModalContent } from "@/components/admin/Modal";
 import EditTags from "@/components/admin/tags/EditTags";
 import FormTags from "@/components/admin/tags/FormTags";
@@ -13,7 +14,7 @@ export default function Tags() {
   
   const { id } = useIdParams("editid")
 
-  const { data } = useQuery({ queryKey: ['tags'], queryFn: getTags})
+  const { data, isLoading } = useQuery({ queryKey: ['tags'], queryFn: getTags})
 
   return (
     <div className="max-w-5xl">
@@ -32,7 +33,8 @@ export default function Tags() {
         </Modal>
       </div>
       <div className="mt-4">
-      {data && <DataTable columns={tagsColumns} data={data} />}
+      {isLoading && <Loading />}  
+      {!isLoading && data && <DataTable columns={tagsColumns} data={data} />}
       </div>
       <RemoveTag />
       {id && <EditTags />}
