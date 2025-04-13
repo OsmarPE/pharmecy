@@ -9,6 +9,8 @@ interface Props {
     message?: string;
     onChangeValue?:(value: string) => void;
     value?: imagenType;
+    file?: File | null;
+    onChangeFile?: (file: File| null) => void;
 }
 
 
@@ -19,7 +21,7 @@ interface imagenType {
     type: string
 }
 
-export default function DragImageInput({  message = '' , onChangeValue, value }: Props) {
+export default function DragImageInput({  message = '' , onChangeValue, value , file, onChangeFile }: Props) {
 
 
     const [isDragging, setIsDragging] = useState(false);
@@ -57,6 +59,7 @@ export default function DragImageInput({  message = '' , onChangeValue, value }:
     const handleRemoveImage = () => {
         setImagen(null)
         onChangeValue?.('')
+        onChangeFile?.(null)
     }
 
 
@@ -89,6 +92,7 @@ export default function DragImageInput({  message = '' , onChangeValue, value }:
 
             setImagen(newImg)
             onChangeValue?.(newImg.url)
+            onChangeFile?.(file)
         };
     }
 

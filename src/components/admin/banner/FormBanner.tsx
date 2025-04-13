@@ -8,11 +8,18 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import DragImageInput from "../drag-and-drop/DragImageInput"
+import { createBanner } from "@/services/banner.services"
+import { toast } from "sonner"
+import { useState } from "react"
 
+interface Props {
+    refetch: () => void;
+}
 
-export default function FormBanner() {
+export default function FormBanner({ refetch }: Props) {
 
     const { closeModal } = useModal()
+    const [file, setFile] = useState<File | null>(null)
 
     const form = useForm<z.infer<typeof bannerValidationSchema>>({
         resolver: zodResolver(bannerValidationSchema),
@@ -21,15 +28,15 @@ export default function FormBanner() {
         },
     })
 
-    const onSubmit = (data: z.infer<typeof bannerValidationSchema>) => {
+    const onSubmit = async(data: z.infer<typeof bannerValidationSchema>) => {
         const formData = new FormData();
-        formData.append("file", data.name);
+        formData.append("image", file as File);        
+        const message = await createBanner(formData)
+        toast.success(message)
         closeModal();
-        
-        // fetch("http://localhost:3000/api/banner", {
-        //     method: "POST",
-        //     body: formData
-        // })
+        refetch()
+
+
     }
 
 
@@ -41,6 +48,8 @@ export default function FormBanner() {
                 <DragImageInput 
                     message={errors?.name?.message}
                     onChangeValue={(value) => form.setValue("name", value)}
+                    file={file}
+                    onChangeFile={setFile}
                 />
                 <div className="flex justify-end items-center mt-6 gap-4">
                     <Button type="button" variant="outline" onClick={closeModal}>Cancelar</Button>

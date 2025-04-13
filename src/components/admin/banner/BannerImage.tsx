@@ -1,10 +1,21 @@
+import { Button } from "@/components/ui/button";
+import { Banner } from "@/lib/types/banner";
+import { Trash } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Props {
-    src: string;
+  data: Banner;
 }
-export default function BannerImage({ src }: Props) {
+export default function BannerImage({ data }: Props) {
+ 
   return (
-    
-      <img className="w-full rounded-lg" src={src} alt="imagen de banner" />
+    <>
+      <img className="w-full rounded-lg" src={`${import.meta.env.VITE_API_URL}/${data.image}`} alt="" />
+      <Button asChild variant={'destructive'} className="absolute top-4 right-4 opacity-90 transition-opacity group-hover/img:opacity-100">
+        <Link to={'?removeid=' + data.id}>
+          <Trash />
+        </Link>
+      </Button>
+    </>
   )
 }

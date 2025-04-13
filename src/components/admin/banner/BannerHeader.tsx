@@ -6,8 +6,9 @@ import { CirclePlus, Pencil } from "lucide-react";
 interface Props {
     modeEdit: boolean;
     setModeEdit: React.Dispatch<React.SetStateAction<boolean>>;
+    refetch: () => void;
 }
-export default function BannerHeader({ modeEdit, setModeEdit }: Props) {
+export default function BannerHeader({ modeEdit, setModeEdit, refetch }: Props) {
     return (
         <header className="mb-4 flex justify-between items-center gap-4">
             <div>
@@ -22,7 +23,7 @@ export default function BannerHeader({ modeEdit, setModeEdit }: Props) {
                     <Modal>
                         <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
                         <ModalContent title="Agregar imagen" description="Crea una nueva imagen">
-                            <FormBanner />
+                            <FormBanner refetch={refetch} />
                         </ModalContent>
                     </Modal>
                 )}

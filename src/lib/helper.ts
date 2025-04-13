@@ -40,12 +40,12 @@ export const categories = [
 
   export const imagesBanner = [
     {
-      src:"https://www.emeritafarmacias.com/wp-content/uploads/METRORUBORIL_AZ_CRA_0225.jpg"
+      image:"https://www.emeritafarmacias.com/wp-content/uploads/METRORUBORIL_AZ_CRA_0225.jpg"
     },
     {
-      src:"https://www.emeritafarmacias.com/wp-content/uploads/VICTAN_0249_2.jpg"
+      image:"https://www.emeritafarmacias.com/wp-content/uploads/VICTAN_0249_2.jpg"
     },
     {
-      src:"https://www.emeritafarmacias.com/wp-content/uploads/GERBER_VITAGUMMIES_6183_.jpg"
+      image:"https://www.emeritafarmacias.com/wp-content/uploads/GERBER_VITAGUMMIES_6183_.jpg"
     }
   ]

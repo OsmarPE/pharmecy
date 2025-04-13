@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { AlignJustify } from "lucide-react";
+import { AlignJustify, Trash } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Props {
     index: number;
@@ -12,9 +13,12 @@ interface Props {
     onDragLeave: (e: React.DragEvent<HTMLElement>) => void;
     onDragOver: (e: React.DragEvent<HTMLElement>) => void;
     onDrop: (e: React.DragEvent<HTMLElement>, index: number) => void;
+    id: number;
 }
 
-export default function BannerAsideImage({ index, src, modeEdit, setIndexImg, indexImg, onDragStart, onDragEnter, onDragLeave, onDragOver, onDrop }: Props) {
+console.log(import.meta.env.VITE_API_URL);
+
+export default function BannerAsideImage({ index, src, modeEdit, setIndexImg, indexImg, onDragStart, onDragEnter, onDragLeave, onDragOver, onDrop, id }: Props) {
     return (
         <figure
         
@@ -27,7 +31,7 @@ export default function BannerAsideImage({ index, src, modeEdit, setIndexImg, in
             onClick={() => setIndexImg(index)}
             key={index}
             className={`banner-aside-img relative cursor-pointer rounded-md p-1 bg-white border-2  h-32 border-dashed hover:border-cyan-700  transition-colors duration-300 group/img ${index === indexImg ? 'border-cyan-700' : 'border-gray-300'}`}>
-            <img className="w-full h-full object-cover rounded-md " src={src} alt="" />
+            <img className="w-full h-full object-cover rounded-md " src={`${import.meta.env.VITE_API_URL}/${src}`} alt="" />
             {modeEdit && (
                 <Button
                     size={'icon'}
@@ -36,6 +40,7 @@ export default function BannerAsideImage({ index, src, modeEdit, setIndexImg, in
                     <AlignJustify />
                 </Button>
             )}
+          
         </figure>
     )
 }
