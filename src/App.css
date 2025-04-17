@@ -625,19 +625,6 @@ button{
     background-color: #f8fafc;
 }
 
-.product.transitioning img {
-    view-transition-name: product-image;
-}
-
-.product-details__image{
-    view-transition-name: product-image;
-}
-.product.transitioning .product__title{
-    view-transition-name: product-title;
-}
-.product-details__title{
-    view-transition-name: product-title;
-}
 
 .product__link{
     position: absolute;
@@ -669,6 +656,18 @@ button{
     font-size: .875rem;
     color: var(--color-primary);
     margin: .125rem 0 .5rem;
+}
+
+.product__prices{
+    display: flex;
+    align-items: center;
+}
+
+.product__price-discount{
+    font-size: .875rem;
+    color: var(--color-gray-400);
+    text-decoration: line-through;
+    margin-right: .375rem;
 }
 .product__price{
     font-size: 1.125rem;

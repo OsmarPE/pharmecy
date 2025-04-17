@@ -1,5 +1,6 @@
 
-import { lazy } from "react"
+import Loading from "@/components/main/Loading"
+import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 const Landing = lazy(() => import("@/pages/main/Landing"))
@@ -39,35 +40,67 @@ export default function index() {
         },
         {
           path:'products',
-          element: <Products />,
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <Products />
+            </Suspense>
+          ),
         },
         {
           path:'locations',
-          element: <Locations />,
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <Locations />
+            </Suspense>
+          ),
         },
         {
           path:'contacts',
-          element: <Contacts />,
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <Contacts />
+            </Suspense>
+          ),
         },
         {
           path:'branches',
-          element: <Branch />,
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <Branch />
+            </Suspense>
+          ),
         },
         {
           path:'about',
-          element: <About />,
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <About />
+            </Suspense>
+          ),
         },
         {
           path:':product',
-          element: <ProductDetails />,
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <ProductDetails />
+            </Suspense>
+          ),
         },
         {
           path:'privacy',
-          element: <Privacy />,
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <Privacy />
+            </Suspense>
+          ),
         },
         {
           path:'policy',
-          element: <Policy />,
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <Policy />
+            </Suspense>
+          ),
         }
   
       ]
