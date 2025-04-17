@@ -7,12 +7,12 @@ interface Props {
 
 export default function Product({ product }: Props) {
 
-    const { name, priceBase, priceDiscount, category } = product;
+    const { name, priceBase, priceDiscount, category , id} = product;
 
     const priceDiscountFormat = priceDiscount ? Number(priceDiscount) : 0
     const imagen = 'imagen'
 
-    const link = `/1`;
+    const link = id.toString();
     return (
         <Link to={link} className="product" viewTransition>
             <figure className="product__figure">

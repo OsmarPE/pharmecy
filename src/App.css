@@ -1103,6 +1103,7 @@ border-right: 1px solid #ebebeb;
 @media screen and (width < 768px){
     .product-details__body{
         flex-direction: column;
+        align-items: stretch;
     }
     .product-details__title{
         font-size: 1.5rem;

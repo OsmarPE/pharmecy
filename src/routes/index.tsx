@@ -47,6 +47,14 @@ export default function index() {
           ),
         },
         {
+          path:'products/:id',
+          element: (
+            <Suspense fallback={<Loading />}> 
+              <ProductDetails />
+            </Suspense>
+          ),
+        },
+        {
           path:'locations',
           element: (
             <Suspense fallback={<Loading />}> 

@@ -7,7 +7,7 @@ export const getProducts = async () => {
 }
 
 export const getProductById = async (id: string) => {
-    const { data } = await API.get<{message: string}>(`/products/${id}`)
+    const { data } = await API.get<{message: Product}>(`/product/${id}`)
     return data.message
 }
 
