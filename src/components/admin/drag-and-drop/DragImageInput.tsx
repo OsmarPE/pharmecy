@@ -91,7 +91,7 @@ export default function DragImageInput({  message = '' , onChangeValue, value , 
 
 
             setImagen(newImg)
-            onChangeValue?.(newImg.url)
+            onChangeValue?.(newImg.name)
             onChangeFile?.(file)
         };
     }

@@ -2,10 +2,11 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Branch } from "@/lib/types/branch"
+import { Product } from "@/lib/types/product"
 import { Role } from "@/lib/types/rol"
 import { User } from "@/lib/types/user"
 import { ColumnDef } from "@tanstack/react-table"
-import { Barcode, Box, DollarSign, Image, Mail, MapPin, MoreHorizontal, Pencil, Tag, Trash, UserRound } from "lucide-react"
+import { ArrowUpDown, Barcode, Box, DollarSign, Image, Mail, MapPin, MoreHorizontal, Pencil, Tag, Trash, UserRound } from "lucide-react"
 import { Link } from "react-router-dom"
 
 type PaymentCategory = {
@@ -29,23 +30,23 @@ type PaymentUser = {
   role: string,
   password: string,
 }
-type PaymentProduct ={
+type PaymentProduct = {
+  id: number;
+  name: string;
+  priceBase: number;
+  priceDiscount: number | null;
+  sku: string;
+  category?: {
     id: number;
     name: string;
-    priceBase: number;
-    priceDiscount: number | null;
-    sku: string;
-    category?: {
-      id: number;
-      name: string;
-    };
-    image: string;
-    tags: {
-      id: number;
-      name: string;
-    }[];
-  }
-  
+  };
+  image: string;
+  tags: {
+    id: number;
+    name: string;
+  }[];
+}
+
 
 export type PaymentLocation = {
   id: number;
@@ -98,7 +99,7 @@ export const rolesColumns: ColumnDef<Role>[] = [
             <DropdownMenuItem asChild>
               <Link to={`/admin/roles?editid=${payment.id}`}>
                 <Pencil width={16} height={16} /> Editar
-            
+
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
@@ -135,7 +136,7 @@ export const tagsColumns: ColumnDef<PaymentTag>[] = [
     cell: ({ row }) => {
       const payment = row.original
       return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 capitalize">
           <Tag width={14} />
           {payment.name}
         </div>
@@ -160,7 +161,7 @@ export const tagsColumns: ColumnDef<PaymentTag>[] = [
             <DropdownMenuItem asChild>
               <Link to={`/admin/tags?editid=${payment.id}`}>
                 <Pencil width={16} height={16} /> Editar
-            
+
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
@@ -172,7 +173,7 @@ export const tagsColumns: ColumnDef<PaymentTag>[] = [
         </DropdownMenu>
       )
     }
-  } 
+  }
 
 ]
 
@@ -227,7 +228,7 @@ export const categoriesColumns: ColumnDef<PaymentCategory>[] = [
       )
     },
   },
-] 
+]
 
 
 export const categoriesData: PaymentCategory[] = [
@@ -362,7 +363,7 @@ export const branchsColumns: ColumnDef<Branch>[] = [
       )
     },
   },
-  
+
   {
     accessorKey: "city",
     header: "Ciudad",
@@ -403,7 +404,7 @@ export const branchsColumns: ColumnDef<Branch>[] = [
                 <Pencil width={16} height={16} /> Editar
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>              
+            <DropdownMenuItem asChild>
               <Link to={`/admin/branchs?removeid=${payment.id}`}>
                 <Trash width={16} height={16} /> Eliminar
               </Link>
@@ -415,48 +416,71 @@ export const branchsColumns: ColumnDef<Branch>[] = [
   }
 ]
 
-export const productsColumns: ColumnDef<PaymentProduct>[] = [
-  {
-    accessorKey: "id",
-    header: "Id",
-  },
+export const productsColumns: ColumnDef<Product>[] = [
   {
     accessorKey: "name",
-    header: "Nombre",
-  },
-  {
-    accessorKey: "stock",
-    header: "Stock",
-    cell: ({ row }) => {
-      const payment = row.original
+    header: ({ column }) => {
       return (
-        <Badge variant={'secondary'} className="text-gray-500 flex items-center gap-1"> <Box width={14}/> 100</Badge>
+        <Button
+          className="uppercase text-xs"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Nombre
+          <ArrowUpDown />
+        </Button>
       )
     },
+    enableSorting: true,
+
   },
+  // {
+  //   accessorKey: "stock",
+  //   header: "Stock",
+  //   cell: ({ row }) => {
+  //     const payment = row.original
+  //     return (
+  //       <Badge variant={'secondary'} className="text-gray-500 flex items-center gap-1"> <Box width={14}/> 100</Badge>
+  //     )
+  //   },
+  // },
   {
     accessorKey: "priceBase",
-    header: "Precio",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="uppercase text-xs"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Precio
+          <ArrowUpDown />
+        </Button>
+      )
+    },
     cell: ({ row }) => {
       const payment = row.original
+      const price = payment.priceBase
       return (
-          <span className="font-medium">${payment.priceBase}</span>
+        <span className="font-medium">${price}</span>
       )
     },
   },
   {
     accessorKey: "priceDiscount",
     header: "Descuento",
+    enableSorting: true,
     cell: ({ row }) => {
       const payment = row.original
       return (
-        <span className="text-gray-500">${payment.priceDiscount}</span>
+        <span className="text-gray-500">${payment.priceDiscount ? payment.priceDiscount : '0.00'}</span>
       )
     },
   },
   {
     accessorKey: "sku",
     header: "SKU",
+    enableSorting: false,
     cell: ({ row }) => {
       const payment = row.original
       return (
@@ -470,6 +494,10 @@ export const productsColumns: ColumnDef<PaymentProduct>[] = [
   {
     accessorKey: "category",
     header: "Categoría",
+    enableSorting: false,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
     cell: ({ row }) => {
       const payment = row.original
       return (
@@ -479,15 +507,16 @@ export const productsColumns: ColumnDef<PaymentProduct>[] = [
       )
     },
   },
-   {
+  {
     accessorKey: "image",
     header: "Imagen",
+    enableSorting: false,
     cell: ({ row }) => {
       const payment = row.original
       return (
         <div className="flex items-center gap-2">
           <Image width={14} />
-        
+
         </div>
       )
     },
