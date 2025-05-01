@@ -77,11 +77,9 @@ export const useCart = create<CartStore>((set, get) => ({
     )
   },
 
-  getTotalPriceWithoutDiscount: () => {
-    return get().items.reduce((total, item) => {
-      const price = item.priceDiscount > 0 ? item.priceDiscount : item.priceBase
-      return total + price * item.quantity
-    },
+  getTotalPriceWithoutDiscount:() => {
+    return get().items.reduce(
+      (total, item) => total + item.price * item.quantity,
       0
     )
   },
