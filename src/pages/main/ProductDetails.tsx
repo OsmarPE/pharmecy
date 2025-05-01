@@ -6,12 +6,14 @@ import { getProductById } from "@/services/product.services";
 import { ChevronLeft, ShoppingCart, Twitter, Facebook, Share2,  } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useCart } from "@/hooks/use-cart";
 
 export default function ProductDetails() {
     const { id } = useParams<{ id: string }>()
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [product, setProduct] = useState<null | Product>(null)
+    const {  addItem } = useCart()
 
     const fetchProduct = async () => {
         if (!id) return;
@@ -36,6 +38,10 @@ export default function ProductDetails() {
     if (error) return <ProductError message={error} onRetry={fetchProduct} />;
     if (!product) return <ProductError message="Producto no encontrado" />;
 
+    const { priceBase, priceDiscount, category, name } = product;
+
+
+    
     return (
         <div className="product-details">
             <div className="container">
@@ -48,12 +54,12 @@ export default function ProductDetails() {
                         <img className="product-details__image" src={product.image || "https://www.emeritafarmacias.com/wp-content/uploads/8904103340372.png"} alt={product.name} />
                     </div>         
                     <div className="product-details__right">
-                        <h2 className="product-details__title">{product.name}</h2>
+                        <h2 className="product-details__title">{name}</h2>
                         <p className="product-details__price"> 
-                            {product.priceDiscount > 0 && (
-                                <span className="product-details__price--discount">${product.priceDiscount}</span>
+                            {priceDiscount > 0 && (
+                                <span className="product-details__price--discount">${priceBase}</span>
                             )}
-                            ${product.priceBase}
+                            ${priceDiscount > 0 ? priceDiscount : priceBase}
                         </p>
                         <div className="product-details__actions">
                             <div className="product-details__control">
@@ -61,7 +67,7 @@ export default function ProductDetails() {
                                 <div className="product-details__control-item">1</div>
                                 <button className="product-details__control-item">-</button>
                             </div> 
-                            <Button className="flex-1 h-12">Agregar al carrito <ShoppingCart /> </Button> 
+                            <Button onClick={() => addItem(product)} className="flex-1 h-12">Agregar al carrito <ShoppingCart /> </Button> 
                         </div>
                         <div className="product-details__text">
                             <p className="product-details__sku">
@@ -69,7 +75,7 @@ export default function ProductDetails() {
                             </p>
                             <div className="product-details__category">
                                 <span>Categoria:</span>
-                                <a className="product-details__category__link" href="#">{product.category?.name || 'Sin categoría'}</a>
+                                <a className="product-details__category__link" href="#">{category?.name || 'Sin categoría'}</a>
                             </div>
                         </div>
 

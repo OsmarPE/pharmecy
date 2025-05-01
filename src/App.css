@@ -197,12 +197,12 @@ button{
     right: 0;
     display: none;
     place-content: center;
-    width: 22px;
-    height: 22px;
+    width: 1.125rem;
+    height: 1.125rem;
     background-color: var(--color-primary);
     color: var(--color-white-100);
     border-radius: 50%;
-    font-size: .75rem;
+    font-size: .625rem;
 }
 .cart-number.active{
     display: grid;
@@ -563,6 +563,7 @@ button{
 
 .aside__link{
     display: inline-block;
+    text-align: left;
     padding: .875rem 0;
     width: 100%;
     font-weight: 400;
@@ -570,6 +571,10 @@ button{
     font-size: .875rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.163);
     transition: color 0.4s ease;
+}
+
+.aside__link.active{
+    color: var(--color-primary);
 }
 
 .aside__link:hover{
@@ -615,7 +620,7 @@ button{
     height: 100%;
 }
 
-.product__image-sckeleto{
+.product__image-sckeleto,.cart__detail-skeleton{
     position: absolute;
     inset: 0;
     display: flex;
@@ -685,6 +690,7 @@ button{
     border-radius: 12px;
     max-width: 400px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    width: 90%;
 }
 @media screen and (width < 768px){
     .header__body{
@@ -692,7 +698,6 @@ button{
     }
     .cart{
         left: 0;
-        width: 90%;
         margin: 0 auto;
     }
 }
@@ -732,6 +737,7 @@ button{
 .cart__body{
     display: grid;
     gap: .5rem;
+    flex: 1;
 }
 
 .cart__title{
@@ -792,12 +798,16 @@ button{
 
 .cart__footer{
     padding: 1.5rem 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     font-weight: 400;
     font-size: .875rem;
 }
+
+.cart__footer-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .cart__footer-text{
     color: var(--color-gray-100);
 }
@@ -805,6 +815,16 @@ button{
     font-size: 1rem;
     font-weight: 500;
 }
+
+.cart__empty{
+    min-height: 100px;
+    display: flex;
+    justify-content: center;   
+    align-items: center;
+    font-size: .875rem;
+    color: var(--color-gray-100);
+}
+
 .main-branch, .main-contact{
     padding: 4rem 0;
 }

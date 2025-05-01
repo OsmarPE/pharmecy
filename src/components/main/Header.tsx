@@ -2,7 +2,8 @@ import LogoTransparent from '@/assets/img/logo-transparent.png'
 import Logo from '@/assets/img/logo.png'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import Cart from './Cart'
+import Cart from './cart/Cart'
+import CartButton from './cart/CartButton'
 
 const links: {name: string, to: string}[] = [
     { name: 'Inicio', to: '/' },
@@ -70,12 +71,7 @@ export default function Header() {
                                 }
                             </ul>
                         </nav>
-                        <button className="cart-btn" onClick={() => setshowCart(!showCart)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-                            <div className="cart-number">
-                                1
-                            </div>
-                        </button>
+                       <CartButton setshowCart={setshowCart} />
                         <label className="header__btn" role="button" htmlFor="menu">x</label>
                     </div>
                 </div>

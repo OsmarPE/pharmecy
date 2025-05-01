@@ -31,8 +31,8 @@ export default function Product({ product }: Props) {
                 <Link to={link} className="product__title" viewTransition>{name}</Link>
                 <p className="product__category">{category?.name}</p>
                 <div className="product__prices">
-                    {priceDiscountFormat !== 0 && <p className="product__price-discount">${priceDiscountFormat}</p>}
-                    <p className="product__price">${priceBase}</p>
+                    {priceDiscountFormat !== 0 && <p className="product__price-discount">${priceBase}</p>}
+                    <p className="product__price">${priceDiscountFormat !== 0 ? priceDiscountFormat : priceBase}</p>
                 </div>
             </div>
         </Link>

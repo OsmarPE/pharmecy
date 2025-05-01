@@ -1,6 +1,6 @@
 import Banner from "@/components/main/Banner";
 import Product from "@/components/main/Product";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "@/services/category.services";
 import CategorySkeleton from "@/components/main/skeleton/CategorySkeleton";
@@ -9,9 +9,17 @@ import { getProducts } from "@/services/product.services";
 
 
 export default function Products() {
-  
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryCurrent = searchParams.get('category') ?? ''
   const { data:categories , isLoading} = useQuery({ queryKey: ['categories'], queryFn: getCategories})
   const { data:products , isLoading:isLoadingProducts} = useQuery({ queryKey: ['products'], queryFn: getProducts})
+  
+  const handleChangeCategory = (category:string) => {
+    setSearchParams({
+      category
+    })
+  }
+  
   return (
     <div>
       <Banner title="Productos" />
@@ -27,8 +35,8 @@ export default function Products() {
                             <h2 className="aside__subtitle">Categorías</h2>
                             <ul className="aside__list">
                                 {categories?.map((category, index) => (
-                                    <li key={index} className="aside__item">
-                                      <Link className="aside__link" to={category.name}>{category.name}</Link>
+                                    <li key={index} className={`aside__item`}>
+                                      <button onClick={() => handleChangeCategory(category.name)} className={`aside__link ${category.name === categoryCurrent ? 'active' : ''}`} >{category.name}</button>
                                     </li>
                                 ))}
                             </ul>
