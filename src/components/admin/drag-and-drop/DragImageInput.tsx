@@ -74,7 +74,6 @@ export default function DragImageInput({  message = '' , onChangeValue, value , 
             const file = files[0];
 
             if (!file.type.startsWith('image')) {
-                console.log('El archivo no es una imagen')
                 return
             }
 
@@ -96,7 +95,8 @@ export default function DragImageInput({  message = '' , onChangeValue, value , 
         };
     }
 
-
+    console.log(imagen);
+    
     return (
         <div>
             <div className="space-y-4">

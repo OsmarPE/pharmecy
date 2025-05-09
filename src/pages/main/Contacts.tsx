@@ -3,8 +3,6 @@ import TextareaForm from "@/components/components-general/TextareaForm";
 import Banner from "@/components/main/Banner";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { validationContact } from "@/validation/contact";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -25,8 +23,7 @@ export default function Contacts() {
     })
 
     const onSubmit = (values: z.infer<typeof validationContact>) => {
-        console.log(values)
-    }
+            }
 
     return (
         <>

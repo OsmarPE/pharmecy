@@ -1,8 +1,14 @@
-import { Product } from "@/lib/types/product"
+import { Product, ProductByBranch } from "@/lib/types/product"
 import { API } from "./api"
+import { AxiosError } from "axios"
 
 export const getProducts = async () => {
     const { data } = await API.get<{message: Product[]}>("/product")
+    return data.message
+}
+
+export const getProductsByBranch = async (branchId: number) => {
+    const { data } = await API.get<{message: ProductByBranch[]}>(`/product?branch=${branchId}`)
     return data.message
 }
 
@@ -30,6 +36,14 @@ export const updateProduct = async (id: string, newDate: FormData) => {
 }
 
 export const deleteProduct = async (id: string) => {
-    const { data: response } = await API.delete<{message: string}>(`/product/${id}`)
-    return response.message
+    try {
+        const { data: response } = await API.delete<{message: string}>(`/product/${id}`)
+        return response.message
+        
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            const message:string = error.response?.data?.message ? error.response.data.message : error.message
+            throw new Error(message)
+        }
+    }
 }

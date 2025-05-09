@@ -2,25 +2,21 @@ import Container from "@/components/Container";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form } from "@/components/ui/form";
 import { z } from 'zod'
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
 import { useForm } from "react-hook-form";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Heart, Shield } from "lucide-react";
+import {  Shield } from "lucide-react";
 import { validationLogin } from "@/validation/auth";
 import InputForm from "@/components/components-general/InputForm";
+import { login } from "@/services/user.services";
+import { Navigate, useNavigate } from "react-router-dom";
 
- 
 export default function Login() {
 
+  const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+  
+  if (token) return <Navigate to="/admin" replace/>
+  
   const form = useForm<z.infer<typeof validationLogin>>({
     resolver: zodResolver(validationLogin),
     defaultValues: {
@@ -30,9 +26,17 @@ export default function Login() {
   })
 
 
-  function onSubmit(values: z.infer<typeof validationLogin>) {
+  async function onSubmit(values: z.infer<typeof validationLogin>) {
 
-    console.log(values)
+    try {
+      const data = await login(values.email, values.password)
+      localStorage.setItem('token', data.token)
+      navigate('/admin',{replace: true})
+
+    } catch (error) {
+            
+    }
+
   }
 
   return (

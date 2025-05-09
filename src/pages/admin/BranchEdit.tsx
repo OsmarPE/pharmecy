@@ -139,8 +139,7 @@ export default function BranchEdit() {
     }
     const handleRemoveSchedule = (index: number) => {
         const schedules = getValues('schedule')
-        console.log(schedules)
-        setValue('schedule', schedules.filter((_, i) => i !== index))
+                setValue('schedule', schedules.filter((_, i) => i !== index))
     }
     const handleRemoveContact = (index: number) => {
         const contacts = getValues('contact')
@@ -197,8 +196,7 @@ export default function BranchEdit() {
             return
         }
 
-        console.log(data);
-        
+                
         
         mutation.mutate(data,{
             onSuccess: (message) => {

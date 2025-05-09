@@ -49,7 +49,7 @@ export default function FormSchedule() {
     const { formState: { errors }, getValues, setValue, clearErrors, setError } = form;
 
     const onSubmit = (data: z.infer<typeof scheduleValidationSchema>) => {
-        console.log(data)
+    
     }
 
     const handleSaveSchedule = () => {

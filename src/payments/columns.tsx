@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Branch } from "@/lib/types/branch"
-import { Product } from "@/lib/types/product"
+import { Product, ProductByBranch } from "@/lib/types/product"
 import { Role } from "@/lib/types/rol"
 import { User } from "@/lib/types/user"
 import { ColumnDef } from "@tanstack/react-table"
@@ -434,16 +434,6 @@ export const productsColumns: ColumnDef<Product>[] = [
     enableSorting: true,
 
   },
-  // {
-  //   accessorKey: "stock",
-  //   header: "Stock",
-  //   cell: ({ row }) => {
-  //     const payment = row.original
-  //     return (
-  //       <Badge variant={'secondary'} className="text-gray-500 flex items-center gap-1"> <Box width={14}/> 100</Badge>
-  //     )
-  //   },
-  // },
   {
     accessorKey: "priceBase",
     header: ({ column }) => {
@@ -468,7 +458,148 @@ export const productsColumns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "priceDiscount",
-    header: "Descuento",
+    header: "Precio de Desc.",
+    enableSorting: true,
+    cell: ({ row }) => {
+      const payment = row.original
+      return (
+        <span className="text-gray-500">${payment.priceDiscount ? payment.priceDiscount : '0.00'}</span>
+      )
+    },
+  },
+  {
+    accessorKey: "sku",
+    header: "SKU",
+    enableSorting: false,
+    cell: ({ row }) => {
+      const payment = row.original
+      return (
+        <div className="flex items-center gap-2">
+          <Barcode width={14} />
+          {payment.sku}
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "category",
+    header: "Categoría",
+    enableSorting: false,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+    cell: ({ row }) => {
+      const payment = row.original
+      return (
+        <Badge variant={'outline'}>
+          {payment.category?.name ?? "Sin Categoría"}
+        </Badge>
+      )
+    },
+  },
+  // {
+  //   accessorKey: "image",
+  //   header: "Imagen",
+  //   enableSorting: false,
+  //   cell: ({ row }) => {
+  //     const payment = row.original
+  //     return (
+  //       <div className="flex items-center gap-2">
+  //         <Image width={14} />
+
+  //       </div>
+  //     )
+  //   },
+  // },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const payment = row.original
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link to={`/admin/products?editid=${payment.id}`}>
+                <Pencil width={16} height={16} /> Editar
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link to={`/admin/products?removeid=${payment.id}`}>
+                <Trash width={16} height={16} /> Eliminar
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    }
+  }
+
+]
+
+export const productsColumnsByBranch: ColumnDef<ProductByBranch>[] = [
+  {
+    accessorKey: "name",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="uppercase text-xs"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Nombre
+          <ArrowUpDown />
+        </Button>
+      )
+    },
+    enableSorting: true,
+
+  },
+  {
+    accessorKey: "amount",
+    header: "Stock",
+    cell: ({ row }) => {
+      const amount = row.original.amount
+
+      if(amount == 0) return <Badge variant={'withoutStock'} className=" flex items-center gap-1"> <Box width={14}/> Sin stock</Badge>
+
+      return (
+        <Badge variant={'secondary'} className="text-gray-500 flex items-center gap-1"> <Box width={14}/> {amount}</Badge>
+      )
+    },
+  },
+  {
+    accessorKey: "priceBase",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="uppercase text-xs"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Precio
+          <ArrowUpDown />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      const payment = row.original
+      const price = payment.priceBase
+      return (
+        <span className="font-medium">${price}</span>
+      )
+    },
+  },
+  {
+    accessorKey: "priceDiscount",
+    header: "Precio de Desc.",
     enableSorting: true,
     cell: ({ row }) => {
       const payment = row.original
@@ -508,20 +639,6 @@ export const productsColumns: ColumnDef<Product>[] = [
     },
   },
   {
-    accessorKey: "image",
-    header: "Imagen",
-    enableSorting: false,
-    cell: ({ row }) => {
-      const payment = row.original
-      return (
-        <div className="flex items-center gap-2">
-          <Image width={14} />
-
-        </div>
-      )
-    },
-  },
-  {
     id: "actions",
     cell: ({ row }) => {
       const payment = row.original
@@ -536,11 +653,13 @@ export const productsColumns: ColumnDef<Product>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Acciones</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Pencil width={16} height={16} /> Editar
+            <DropdownMenuItem asChild>
+              <Link to={`/admin/products?editproductid=${payment.branchProduct}`}>
+                <Pencil width={16} height={16} /> Editar
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link to={`/admin/products?removeid=${payment.id}`}>
+              <Link to={`/admin/products?removeproduct=${payment.branchProduct}`}>
                 <Trash width={16} height={16} /> Eliminar
               </Link>
             </DropdownMenuItem>
@@ -551,7 +670,6 @@ export const productsColumns: ColumnDef<Product>[] = [
   }
 
 ]
-
 export const productsData: PaymentProduct[] = [
   {
     id: 1,

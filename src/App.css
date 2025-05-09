@@ -850,9 +850,12 @@ button{
     margin-top: 3rem;
     display: grid;
     gap: 1.5rem;
-    grid-template-columns: 1fr 250px;
+    grid-template-columns: 1fr 280px;
 }
-
+.contacts{
+    max-height: 400px;
+    overflow-y: auto;    
+}
 .contacts__item{
     padding: 1rem 0;
 }
@@ -883,6 +886,8 @@ button{
 }
 .contacts__number svg{
     color: var(--color-primary);
+    width: 14px;
+    height: 14px;
 }
 
 .form{
@@ -1003,6 +1008,23 @@ button{
 .product__title,.policy__subtitle{
     font-size: 1.125rem;
 }
+
+.product__offer{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 3.125rem;
+    height: 3.125rem;
+    background-color: var(--color-primary);
+    color: var(--color-white-100);
+    display: flex;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: .625rem;
+}
+
 .policy__subtitle{
     font-weight: 600;
     margin-top: 1rem;

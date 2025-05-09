@@ -23,8 +23,7 @@ export default function RemoveTag() {
         toast.success(data)
         client.invalidateQueries({queryKey: ['tags']})
     } catch (error) {
-        console.log(error)
-    } finally{
+            } finally{
         handleCancel()
     }
    }

@@ -1,4 +1,5 @@
 
+import ProtectedRoutes from "@/components/auth/ProtectedRoutes"
 import Loading from "@/components/main/Loading"
 import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
@@ -88,14 +89,6 @@ export default function index() {
           ),
         },
         {
-          path:':product',
-          element: (
-            <Suspense fallback={<Loading />}> 
-              <ProductDetails />
-            </Suspense>
-          ),
-        },
-        {
           path:'privacy',
           element: (
             <Suspense fallback={<Loading />}> 
@@ -128,7 +121,11 @@ export default function index() {
     },
     {
       path:'admin',
-      element: <Dashboard />,
+      element: (
+        <ProtectedRoutes>
+          <Dashboard />
+        </ProtectedRoutes>
+      ),
       children: [
         {
           element: <HomeDash />,

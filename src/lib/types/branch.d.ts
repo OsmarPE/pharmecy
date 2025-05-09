@@ -7,5 +7,5 @@ export interface Branch {
     name: string;
     schedule?: Schedule[];
     location?: Location;
-    contact?: Contact;
+    contact?: Contact[];
 }

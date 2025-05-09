@@ -16,9 +16,7 @@ export default function Users() {
   const { id } = useIdParams("editid")
   const { data, isLoading } = useQuery({ queryKey: ['users'], queryFn: getUsers})
 
-  console.log(data)
-
-  return (
+    return (
     <div className="max-w-5xl">
       <header className="mb-4">
           <h1 className="font-medium text-xl">Usuarios</h1>

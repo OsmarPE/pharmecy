@@ -22,7 +22,7 @@ export default function RemoveBranch() {
         toast.success(data)
         client.invalidateQueries({queryKey: ['branchs']})
     } catch (error) {
-        console.log(error)
+            
     } finally{
         handleCancel()
     }

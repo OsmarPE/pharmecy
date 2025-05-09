@@ -26,9 +26,10 @@ import { getTags } from "@/services/tags.services"
 export default function FormProduct() {
 
     const client = useQueryClient()
+    const {data:tagsData } = useQuery({ queryKey: ['tags'], queryFn: getTags })
     const { closeModal } = useModal()
     const [modeAddTag, setmodeAddTag] = useState(false)
-    const [tagsData, settagsData] = useState([{ id: 1, name: 'Medicamentos' }, { id: 2, name: 'Dermatología' }, { id: 3, name: 'Terapia' }])
+
     const [tagId, setTagId] = useState('')
     const [file, setFile] = useState<File | null>(null)
     const { data:categories } = useQuery({ queryKey: ['categories'], queryFn: getCategories })
@@ -55,12 +56,10 @@ export default function FormProduct() {
 
 
     const onSubmit = (data: z.infer<typeof productValidationSchema>) => {
-        console.log(data)
-        
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("priceBase", data.priceBase.toString());
-        formData.append("priceDiscount", data?.priceDiscount?.toString() ?? "");
+        formData.append("priceDiscount", data?.priceDiscount?.toString() ?? "0");
         formData.append("sku", data.sku);
         formData.append("category", data.category);
         formData.append("tags", JSON.stringify(data.tags));
@@ -75,8 +74,7 @@ export default function FormProduct() {
                 closeModal()
             },
             onError: (error) => {
-                console.log(error);
-                
+                                
                 // toast.error('Error al guardar')
             }
         })
@@ -91,7 +89,7 @@ export default function FormProduct() {
 
     const handleSaveTag = () => {
         const tags = getValues('tags')
-        const name = tagsData.find((tag) => tag.id === Number(tagId))?.name || ''
+        const name = tagsData?.find((tag) => tag.id === Number(tagId))?.name || ''
         if (!name) return
         setValue('tags', [...tags, {
             id: Number(tagId),

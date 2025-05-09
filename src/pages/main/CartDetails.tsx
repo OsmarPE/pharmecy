@@ -1,7 +1,9 @@
 import Container from "@/components/Container";
 import Banner from "@/components/main/Banner";
+import { QuoterPDF } from "@/components/main/QuoterPDF";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import { ArrowDownToLine, Image, Minus, Plus, ScanLine } from "lucide-react";
 import { useMemo } from "react";
 
@@ -72,10 +74,14 @@ export default function CartDetails() {
                             <span className="">${totalPrice}</span>
                         </li>
                     </ul>
-                    <Button className="w-full mt-6" size={'lg'}>
-                        <ArrowDownToLine size={20} />
-                        Generar cotizacion
-                    </Button>
+                   
+                        <Button asChild className="w-full mt-6" size={'lg'}>
+                    <PDFDownloadLink document={<QuoterPDF products={items} total={totalPrice} />} fileName="cotizacion.pdf">
+                            <ArrowDownToLine size={20} />
+                            Generar cotizacion
+                    </PDFDownloadLink>
+                    
+                        </Button>
                 </aside>
             </div>
         </Container>

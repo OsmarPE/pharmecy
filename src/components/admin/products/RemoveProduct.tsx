@@ -26,8 +26,7 @@ export default function RemoveProduct() {
             handleCancel()
         },
         onError: (error) => {
-            console.log(error);
-            toast.error('Error al eliminar')
+            toast.error(error.message)
         }
     })
    }

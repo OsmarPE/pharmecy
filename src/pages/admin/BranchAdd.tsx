@@ -111,8 +111,7 @@ export default function BranchAdd() {
     }
     const handleRemoveSchedule = (index: number) => {
         const schedules = getValues('schedule')
-        console.log(schedules)
-        setValue('schedule', schedules.filter((_, i) => i !== index))
+                setValue('schedule', schedules.filter((_, i) => i !== index))
     }
     const handleRemoveContact = (index: number) => {
         const contacts = getValues('contact')

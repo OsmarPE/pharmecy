@@ -11,3 +11,8 @@ export interface Product {
     image: string;
     tags?: Tag[]
 }
+
+export interface ProductByBranch extends Product {
+    amount: number;
+    branchProduct: number;
+}

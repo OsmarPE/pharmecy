@@ -6,6 +6,7 @@ import { getCategories } from "@/services/category.services";
 import CategorySkeleton from "@/components/main/skeleton/CategorySkeleton";
 import ProductSkeleton from "@/components/main/skeleton/ProductSkeleton";
 import { getProducts } from "@/services/product.services";
+import { useMemo } from "react";
 
 
 export default function Products() {
@@ -19,6 +20,11 @@ export default function Products() {
       category
     })
   }
+
+  const productsByCategory = useMemo(() => {
+    if(!categoryCurrent) return products
+    return products?.filter(product => product.category?.name === categoryCurrent)
+  }, [categoryCurrent, products])
   
   return (
     <div>
@@ -46,15 +52,21 @@ export default function Products() {
                 </aside>
                 <section className="main__products">
                     <div className="main__pages">
-                        <a className="main__page" href="#">Inicio</a>
+                        <Link to={'/products'} className="main__page">Inicio</Link>
                         <p>/</p>
-                        <a className="main__page active" href="#">Medicamentos</a>
+                        {
+                          categoryCurrent ? (
+                            
+                              <Link className="main__page active" to="#">{categoryCurrent}</Link>
+                            
+                          ) : <p>Productos</p>
+                        }
                     </div>
                     {isLoadingProducts ? (
                       <ProductSkeleton />
                     ) : (
                       <div className="main__grid">
-                        {products?.map((product, index) => (
+                        {productsByCategory?.map((product, index) => (
                           <Product key={index} product={product} />
                         ))}
                       </div>

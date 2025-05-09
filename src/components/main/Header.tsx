@@ -41,11 +41,16 @@ export default function Header() {
             setisScrolledHeader(false)
         }
         
+        if(showCart){
+            setshowCart(false)
+        }
+        
         return () => {
             window.removeEventListener('scroll', scrollHandler)
         }
 
     }, [pathname])
+
 
 
 

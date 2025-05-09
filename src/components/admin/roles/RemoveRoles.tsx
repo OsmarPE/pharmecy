@@ -22,7 +22,7 @@ export default function RemoveRoles() {
         toast.success(data)
         client.invalidateQueries({queryKey: ['roles']})
     } catch (error) {
-        console.log(error)
+           
     } finally{
         handleCancel()
     }

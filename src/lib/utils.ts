@@ -27,3 +27,31 @@ function formatHourWithAmPm(time: string) {
   
   return `${hour12}:${minute.toString().padStart(2, '0')} ${period}`;
 }
+
+
+const regex = /^\d+-\d+\.(webp|jpg|jpeg|png)$/i;
+
+
+export const validateImage = (name: string) => {
+  return regex.test(name);
+}
+
+export async function createFileFromImageUrl(fileName = "image.webp") {
+  try {
+
+    const url = import.meta.env.VITE_API_URL + '/' + fileName
+    // Hacer una solicitud para obtener la imagen como Blob
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("No se pudo cargar la imagen");
+    
+    const blob = await response.blob();
+    
+    // Crear un objeto File a partir del Blob
+    const file = new File([blob], fileName, { type: blob.type });
+    
+    return file;
+  } catch (error) {
+    console.error("Error:", error);
+    return null;
+  }
+}

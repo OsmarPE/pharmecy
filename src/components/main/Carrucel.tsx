@@ -8,11 +8,14 @@ import { type CarouselApi } from "@/components/ui/carousel"
 import {  useState } from "react"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Button } from "../ui/button"
+import useBanner from "@/hooks/use-banner"
+import LoadingCarrucel from "./LoadingCarrucel"
 
 export default function Carrucel() {
-    const [api, setApi] = useState<CarouselApi>()
- 
-  
+    const [api, setApi] = useState<CarouselApi>() 
+    const { data, loading } = useBanner()
+
+    if (loading) return <LoadingCarrucel />
 
     return (
         <div className="max-w-5xl mx-auto mt-10">
@@ -24,15 +27,13 @@ export default function Carrucel() {
             loop: true
         }}>
             <CarouselContent>
-                <CarouselItem>
-                    <img className="news__image" src="https://www.uhipocrates.edu.mx/wp-content/uploads/2022/07/estudia-el-arte-de-la-medicina.jpg" alt="" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img className="news__image" src="https://www.nosequeestudiar.net/site/assets/files/1695521/de-que-se-trata-la-carrera-de-medicina.jpg" alt="" />
-                </CarouselItem>
-                <CarouselItem>
-                    <img className="news__image" src="https://www.uhipocrates.edu.mx/wp-content/uploads/2022/07/estudia-el-arte-de-la-medicina.jpg" alt="" />
-                </CarouselItem>
+                {
+                    data.map((banner, index) => (
+                        <CarouselItem key={index}>
+                            <img className="news__image"  src={`${import.meta.env.VITE_API_URL}/${banner.image}`} alt="" />
+                        </CarouselItem>
+                    ))
+                }
             </CarouselContent>
         </Carousel>
         <div className="flex justify-end items-center gap-4 mt-6">

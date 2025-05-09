@@ -100,8 +100,7 @@ export function DataTableProducts<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   useEffect(() => {
-    console.log("Estado de sorting:", sorting);
-  }, [sorting]);
+      }, [sorting]);
 
   const table = useReactTable({
     data,

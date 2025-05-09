@@ -46,7 +46,6 @@ export default function Maps() {
 function EvenMaps({ setPositionCurrent }: { setPositionCurrent: any }) {
     useMapEvents({
         click(event) {
-            console.log("Clicked on the map at", event.latlng);
             setPositionCurrent(event.latlng); // Guarda la nueva posición
         },
     });

@@ -10,8 +10,7 @@ export default function CartItem({product}: Props) {
     const { addItem, removeItem, updateQuantity } = useCart()
     const { name,priceBase,quantity,id,image,category,priceDiscount,price } = product
 
-    console.log(priceDiscount);
-    
+        
     
     
     return (
