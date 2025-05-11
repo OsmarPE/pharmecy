@@ -1,3 +1,4 @@
+import { Branch } from "./branch";
 
 
 export interface Schedule {
@@ -9,3 +10,10 @@ export interface Schedule {
 }
 
 type ScheduleForm = Omit<Schedule, 'id'>;
+type ScheduleWithBranch = Schedule & { branch: Branch };
+
+export interface ScheduleFilter { 
+    id: number, 
+    name: string,
+    schedule: {dayFrom: string, dayTo: string, timeIn: string, timeOut: string }[]
+}

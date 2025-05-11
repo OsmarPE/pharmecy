@@ -3,10 +3,10 @@ import { z } from "zod";
 
 
 const scheduleValidationSchema = z.object({
-    timeIn: z.string().min(3),
-    timeOut: z.string().min(3),
-    dayTo: z.string().min(3),
-    dayFrom: z.string().min(3),
+    timeIn: z.string().optional(),
+    timeOut: z.string().optional(),
+    dayTo: z.string().optional(),
+    dayFrom: z.string().optional(),
 })
 
 

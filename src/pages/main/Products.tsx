@@ -6,7 +6,13 @@ import { getCategories } from "@/services/category.services";
 import CategorySkeleton from "@/components/main/skeleton/CategorySkeleton";
 import ProductSkeleton from "@/components/main/skeleton/ProductSkeleton";
 import { getProducts } from "@/services/product.services";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { AlertCircle } from "lucide-react";
+
+interface LocationCurrent {
+  latitude: number | null,
+  longitude: number | null,
+}
 
 
 export default function Products() {
@@ -15,6 +21,23 @@ export default function Products() {
   const { data:categories , isLoading} = useQuery({ queryKey: ['categories'], queryFn: getCategories})
   const { data:products , isLoading:isLoadingProducts} = useQuery({ queryKey: ['products'], queryFn: getProducts})
   
+      const [locationCurrent, setlocationCurrent] = useState<LocationCurrent>({
+          latitude: null,
+          longitude: null,
+      })
+
+   useEffect(() => {
+          navigator.geolocation.getCurrentPosition((position) => {
+              setlocationCurrent({
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude,
+              })
+          }, (error) => {
+              console.log(error)
+          })
+      }, [])
+  
+
   const handleChangeCategory = (category:string) => {
     setSearchParams({
       category
@@ -71,6 +94,12 @@ export default function Products() {
                         ))}
                       </div>
                     )}
+                       {
+                          productsByCategory?.length === 0 && <p className="text-sm text-gray-400 flex items-center gap-2">
+                            <AlertCircle className="w-4 h-4" />
+                            No hay productos para mostrar
+                          </p>
+                        }
                 </section>
             </div>
         </div>

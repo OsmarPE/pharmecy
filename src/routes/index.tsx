@@ -2,7 +2,7 @@
 import ProtectedRoutes from "@/components/auth/ProtectedRoutes"
 import Loading from "@/components/main/Loading"
 import { lazy, Suspense } from "react"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
 
 const Landing = lazy(() => import("@/pages/main/Landing"))
 const Login = lazy(() => import("@/pages/auth/Login"))
@@ -128,7 +128,7 @@ export default function index() {
       ),
       children: [
         {
-          element: <HomeDash />,
+          element: <Navigate to="/admin/products" />,
           index: true,
         },
         {

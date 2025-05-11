@@ -13,11 +13,13 @@ const links: {name: string, to: string}[] = [
     { name: 'Contacto', to: '/contacts' },
 ]
 
+
 export default function Header() {
 
     const [isScrolledHeader, setisScrolledHeader] = useState(false)
     const [showCart, setshowCart] = useState(false)
     const location = useLocation()
+
     const {  pathname } = location
 
     const scrollHandler = () => {
@@ -52,8 +54,7 @@ export default function Header() {
     }, [pathname])
 
 
-
-
+    
     return (
         <>
         <header className={(isScrolledHeader) ? "header scroll" : "header"}>

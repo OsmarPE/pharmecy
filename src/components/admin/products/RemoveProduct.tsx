@@ -35,7 +35,7 @@ export default function RemoveProduct() {
 
   return (
     <Modal defaultState={true} >
-        <ModalContent changeOpen={handleCancel} title="Eliminar rol" description="¿Estás seguro de que quieres eliminar este rol?">
+        <ModalContent changeOpen={handleCancel} title="Eliminar Producto" description="¿Estás seguro de que deseas eliminar este producto?">
             <div className="flex justify-end items-center mt-6 gap-4">
                 <Button variant={'outline'} onClick={handleCancel}>Cancelar</Button>
                 <ButtonForm variant={'destructive'} onClick={handleremoveItem}> Eliminar</ButtonForm>

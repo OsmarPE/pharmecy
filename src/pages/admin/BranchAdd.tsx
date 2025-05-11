@@ -14,11 +14,12 @@ import { z } from "zod";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { ContactForm } from "@/lib/types/contact";
-import { formatTextSchedule } from "@/lib/utils";
+import { formatTextSchedule, generateLocation } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { createBranch } from "@/services/branch.services";
+import MapsBranch from "@/components/admin/branch/MapBranch";
 
 export default function BranchAdd() {
 
@@ -67,6 +68,7 @@ export default function BranchAdd() {
 
     watch('schedule')
     watch('contact')
+    watch('location')
     const handleSaveSchedule = () => {
         const schedules = getValues('schedule')
         const newSchedule = schedule
@@ -168,7 +170,12 @@ export default function BranchAdd() {
             return
         }
 
+        if(getValues('location.latitude') === 0 && getValues('location.longitude') === 0){
+            toast.error('Selecciona una ubicación')
+            return
+        }
         
+    
         mutation.mutate(data,{
             onSuccess: (message) => {
                 toast.success(message)
@@ -179,6 +186,8 @@ export default function BranchAdd() {
             }
         })
     }
+
+    const location = generateLocation([getValues('location.latitude'), getValues('location.longitude')])
 
     return (
         <div>
@@ -212,9 +221,9 @@ export default function BranchAdd() {
 
                                     </div>
                                     <div className="grid grid-cols-4 gap-4">
-                                        <InputForm label="Ciudad" placeholder="Madrid" control={form.control} name="location.city" type="text" />
-                                        <InputForm label="Estado" placeholder="Madrid" control={form.control} name="location.state" type="text" />
-                                        <InputForm label="Colonia" placeholder="Madrid" control={form.control} name="location.colony" type="text" />
+                                        <InputForm label="Ciudad" placeholder="Merida" control={form.control} name="location.city" type="text" />
+                                        <InputForm label="Estado" placeholder="Yucatan" control={form.control} name="location.state" type="text" />
+                                        <InputForm label="Colonia" placeholder="Centro" control={form.control} name="location.colony" type="text" />
                                         <InputForm label="Codigo Postal" placeholder="28001" control={form.control} name="location.zipCode" type="text" />
                                     </div>
                                 </div>
@@ -222,7 +231,14 @@ export default function BranchAdd() {
                             <div>
                                 <h2 className="font-medium flex items-center gap-2"> <MapPin width={16} height={16} /> Mapa</h2>
                                 <p className="text-gray-400 text-sm">Selecciona la ubicación donde se ubica la sucursal</p>
-                                <div></div>
+                                <div className="mt-4">
+                                    <MapsBranch positionValue={location} setPositionValue={(value) => {
+                                        if(value){
+                                            setValue('location.latitude', value.lat)
+                                            setValue('location.longitude', value.lng)
+                                        }
+                                    }} />
+                                </div>
                             </div>
                             <div>
                                 <div className="flex items-center gap-4 justify-between">
@@ -327,7 +343,7 @@ export default function BranchAdd() {
                                                 <Switch id="only-week" onCheckedChange={(value) => setOnlyDay(value)} checked={onlyDay} />
                                             </div>
                                             <div className="flex items-center gap-2 justify-between">
-                                                <Label className="" htmlFor="not-working">Esta cerrado</Label>
+                                                <Label className="" htmlFor="not-working">Sucursal cerrada</Label>
                                                 <Switch id="not-working" onCheckedChange={(value) => setNotWorking(value)} checked={notWorking} />
                                             </div>
                                         </div>

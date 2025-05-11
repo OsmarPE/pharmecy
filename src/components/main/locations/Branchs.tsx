@@ -17,7 +17,7 @@ export default function Branchs() {
                     <h2 className="title title--black branch__title ">Sucursales</h2>
                     <div className="branch__grid">
                         <div className="branch__map">
-                            <Maps />
+                            <Maps branch={data ?? []} />
                         </div>
                         <aside className="contacts">
                             <ul className="contacts__list">

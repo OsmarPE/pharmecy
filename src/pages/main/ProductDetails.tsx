@@ -38,9 +38,9 @@ export default function ProductDetails() {
     if (error) return <ProductError message={error} onRetry={fetchProduct} />;
     if (!product) return <ProductError message="Producto no encontrado" />;
 
-    const { priceBase, priceDiscount, category, name } = product;
+    const { priceBase, priceDiscount, category, name, image } = product;
 
-
+    const img = `${import.meta.env.VITE_API_URL}/${image}`
     
     return (
         <div className="product-details">
@@ -51,7 +51,7 @@ export default function ProductDetails() {
                 </Link>
                 <div className="product-details__body">
                     <div className="product-details__left">
-                        <img className="product-details__image" src={product.image || "https://www.emeritafarmacias.com/wp-content/uploads/8904103340372.png"} alt={product.name} />
+                        <img className="product-details__image" src={img} alt={product.name} />
                     </div>         
                     <div className="product-details__right">
                         <h2 className="product-details__title">{name}</h2>

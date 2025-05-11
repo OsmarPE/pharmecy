@@ -1174,3 +1174,18 @@ border-right: 1px solid #ebebeb;
     color: var(--color-primary);
     border-color: var(--color-primary);
 }
+
+
+.leaflet-popup-content-wrapper{
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1) !important;
+    min-width: 360px !important;
+    padding: .25rem !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button{
+    top: 10px !important;
+    right: 10px !important;
+}
+.leaflet-pane{
+    z-index: 10!important;
+}

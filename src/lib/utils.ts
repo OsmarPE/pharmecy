@@ -1,5 +1,8 @@
 import { clsx, type ClassValue } from "clsx"
+import { LatLng, LatLngBounds } from "leaflet"
 import { twMerge } from "tailwind-merge"
+import { Contact } from "./types/contact"
+import { ScheduleFilter, ScheduleWithBranch } from "./types/schedule"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -15,6 +18,8 @@ export function formatTextSchedule({ dayFrom, dayTo, timeIn, timeOut }: { dayFro
 
   return `${dayFrom} a ${dayTo} • ${time}`
 }
+
+
 function formatHourWithAmPm(time: string) {
 
   const timeSplit = time.split(':');
@@ -54,4 +59,58 @@ export async function createFileFromImageUrl(fileName = "image.webp") {
     console.error("Error:", error);
     return null;
   }
+}
+
+export function generateLocation([lat, lng]: [number, number]) {
+
+  const myLatLng = new LatLng(lat, lng);
+
+  return myLatLng;
+}
+
+export function generateContacts(contact: Contact[]) {
+  const numbers =contact?.reduce((acc, item) => {
+    
+    const array = acc[item.type] ? [...acc[item.type], item.number] : [item.number]
+    
+    return {
+        ...acc,
+        [item.type]: array
+    }
+
+}, {} as any) as { tel: string[], cel: string[] }
+
+  return numbers
+
+}
+
+export function filterSchedule(data: ScheduleWithBranch[]) {
+
+  if (!data?.length) return []
+
+  const newData = data?.reduce((acc, item) => {
+    const { dayFrom, dayTo, timeIn, timeOut } = item
+
+    const findExist = acc.findIndex(j => j.id === item.branch.id)
+
+    if (findExist === -1) {
+      acc.push({ id: item.branch.id, name: item.branch.name, schedule: [{ dayFrom, dayTo, timeIn, timeOut }] })
+      return acc
+    }
+
+    acc[findExist].schedule.push({ dayFrom, dayTo, timeIn, timeOut })
+
+    return acc
+  }, [] as ScheduleFilter[])
+
+  return newData
+}
+
+export const formatTimePeriod = (time: string) => {
+  
+    const timeSplit = time.split(':');
+    const hours = parseInt(timeSplit[0]);
+    const minutes = parseInt(timeSplit[1]);
+
+    return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes} ${hours >= 12 ? 'PM' : 'AM'}`
 }

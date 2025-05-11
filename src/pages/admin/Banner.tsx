@@ -117,6 +117,7 @@ export default function Banner() {
                                     {
                                         data?.map((image, index) => (
                                             <BannerAsideImage
+                                                key={index}
                                                 index={index}
                                                 src={image.image}
                                                 modeEdit={modeEdit}

@@ -17,7 +17,7 @@ import { set, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
 import DragImageInput from "../drag-and-drop/DragImageInput"
-import { createProduct, getProductById } from "@/services/product.services"
+import { createProduct, getProductById, updateProduct } from "@/services/product.services"
 import { getTags } from "@/services/tags.services"
 import Modal, { ModalContent } from "../Modal"
 import { useIdParams } from "@/hooks/use-idparams"
@@ -81,7 +81,7 @@ export default function EditProduct({categories}: {categories: Category[]}) {
     const { setValue, getValues, watch } = form
 
     const mutate = useMutation({
-        mutationFn: createProduct
+        mutationFn: (data: FormData) => updateProduct(id ?? '', data),
     })
 
 
@@ -97,7 +97,7 @@ export default function EditProduct({categories}: {categories: Category[]}) {
 
         console.log(Object.fromEntries(formData.entries()));
         
-        return
+        
         mutate.mutate(formData, {
             onSuccess: (message) => {
                 toast.success(message)
@@ -105,7 +105,8 @@ export default function EditProduct({categories}: {categories: Category[]}) {
                 redirect()
             },
             onError: (error) => {
-
+                console.log(error);
+                
                 // toast.error('Error al guardar')
             }
         })
@@ -120,7 +121,11 @@ export default function EditProduct({categories}: {categories: Category[]}) {
 
     const handleSaveTag = () => {
         const tags = getValues('tags')
-        const name = tagsData?.find((tag) => tag.id === Number(tagId))?.name || ''
+        console.log(tagsData?.find((tag) => tag.id === Number(tagId)));
+        console.log(tagId);
+        
+        
+        const name = tagsData?.find((tag) => tag.id === Number(tagId))?.name || ""
         if (!name) return
         setValue('tags', [...tags, {
             id: Number(tagId),
@@ -133,9 +138,6 @@ export default function EditProduct({categories}: {categories: Category[]}) {
     watch('tags')
 
     const tags = getValues('tags')
-
-    console.log(file);
-    
 
 
     return (
@@ -223,7 +225,7 @@ export default function EditProduct({categories}: {categories: Category[]}) {
                         </div>
                         <div className="flex justify-end items-center mt-6 gap-4">
                             <Button type="button" variant="outline" onClick={redirect}>Cancelar</Button>
-                            <ButtonForm type="submit">Agregar</ButtonForm>
+                            <ButtonForm type="submit">Editar</ButtonForm>
                         </div>
                     </form>
                 </Form>}

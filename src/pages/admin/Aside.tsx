@@ -12,16 +12,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Link, NavLink, useLocation } from "react-router-dom"
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { useQueryClient } from "@tanstack/react-query"
 
 // Menu items.
 const items = [
   {
-    title: "Home",
-    url: "/admin",
-    icon: Home,
+    title: "Productos",
+    url: "/admin/products",
+    icon: Box,
   },
   {
     title: "Usuarios",
@@ -44,11 +45,6 @@ const items = [
     icon: TagIcon,
   },
   {
-    title: "Productos",
-    url: "/admin/products",
-    icon: Box,
-  },
-  {
     title: "Categorias",
     url: "/admin/categories",
     icon: Search,
@@ -69,6 +65,13 @@ const items = [
 export function Aside() {
 
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const client = useQueryClient()
+  const logOut = () => {
+    localStorage.removeItem('token')
+    client.clear()
+    navigate('/auth',{ replace: true })
+  }
 
   return (
     <Sidebar >
@@ -113,7 +116,7 @@ export function Aside() {
                 className="w-56"
 
               >
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={logOut}>
                   <LogOut className="text-black" width={16} height={16} />
                   <span>Cerrar sesión</span>
                 </DropdownMenuItem>

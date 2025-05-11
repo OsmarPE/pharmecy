@@ -17,10 +17,12 @@ import { z } from "zod";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { ContactForm } from "@/lib/types/contact";
-import { formatTextSchedule } from "@/lib/utils";
+import { formatTextSchedule, generateLocation } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
+import { LatLng } from "leaflet";
+import MapsBranch from "@/components/admin/branch/MapBranch";
 
 export default function BranchEdit() {
 
@@ -73,6 +75,7 @@ export default function BranchEdit() {
 
     watch('schedule')
     watch('contact')
+    watch('location')
 
     useEffect(() => {
       
@@ -196,7 +199,8 @@ export default function BranchEdit() {
             return
         }
 
-                
+        console.log(data);
+        
         
         mutation.mutate(data,{
             onSuccess: (message) => {
@@ -208,6 +212,11 @@ export default function BranchEdit() {
             }
         })
     }
+
+    const location = getValues('location.latitude') !== 0 ? generateLocation([getValues('location.latitude'), getValues('location.longitude')]) : null   
+
+
+    
 
     return (
         <div>
@@ -251,7 +260,14 @@ export default function BranchEdit() {
                             <div>
                                 <h2 className="font-medium flex items-center gap-2"> <MapPin width={16} height={16} /> Mapa</h2>
                                 <p className="text-gray-400 text-sm">Selecciona la ubicación donde se ubica la sucursal</p>
-                                <div></div>
+                                <div className="mt-4">
+                                    {location !== null &&<MapsBranch positionValue={location} setPositionValue={(value) => {
+                                        if(value){
+                                            setValue('location.latitude', value.lat)
+                                            setValue('location.longitude', value.lng)
+                                        }
+                                    }} />}
+                                </div>
                             </div>
                             <div>
                                 <div className="flex items-center gap-4 justify-between">
