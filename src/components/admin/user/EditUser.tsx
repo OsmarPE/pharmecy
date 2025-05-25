@@ -46,7 +46,6 @@ export default function EditUser() {
         if(data){
             form.setValue("name", data.name)
             form.setValue("email", data.email)
-            form.setValue("password", data.password)
             form.setValue("role", data.role.id.toString())
         }
       
