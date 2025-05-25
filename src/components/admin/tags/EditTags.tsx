@@ -40,7 +40,7 @@ export default function EditTags() {
                 client.invalidateQueries({ queryKey: ['tags'] });
                 redirect();
             },
-            onError: (error) => {
+            onError: () => {
                 toast.error("Error al actualizar la etiqueta");
             }
         })

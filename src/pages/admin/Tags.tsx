@@ -4,7 +4,7 @@ import EditTags from "@/components/admin/tags/EditTags";
 import FormTags from "@/components/admin/tags/FormTags";
 import RemoveTag from "@/components/admin/tags/RemoveTag";
 import { useIdParams } from "@/hooks/use-idparams";
-import { tagsColumns, tagsData } from "@/payments/columns";
+import { tagsColumns } from "@/payments/columns";
 import { DataTable } from "@/payments/data-table";
 import { getTags } from "@/services/tags.services";
 import { useQuery } from "@tanstack/react-query";

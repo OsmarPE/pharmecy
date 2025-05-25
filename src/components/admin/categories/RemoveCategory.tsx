@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Modal, { ModalContent } from "../Modal";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ButtonForm from "@/components/components-general/ButtonForm";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { deleteCategory } from "@/services/category.services";
 import { toast } from "sonner";
 

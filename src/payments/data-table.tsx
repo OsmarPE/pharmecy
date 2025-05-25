@@ -20,7 +20,6 @@ import {
 } from "@/components/ui/table"
 import { Input } from "@/components/ui/input"
 import { useEffect, useState } from "react"
-import { ArrowDown, ArrowUp } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -35,7 +34,6 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-  options = []
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,

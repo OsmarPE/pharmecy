@@ -41,7 +41,7 @@ export default function EditCategory() {
                 client.invalidateQueries({ queryKey: ['categories'] });
                 redirect();
             },
-            onError: (error) => {
+            onError: (_error) => {
                 toast.error("Error al actualizar la categoría");
             }
         })

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ScheduleFilter } from "@/lib/types/schedule";
-import { formatTextSchedule, formatTimePeriod } from "@/lib/utils";
+import { formatTextSchedule } from "@/lib/utils";
 import { Pencil } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -30,7 +30,7 @@ export default function ScheduleCard({ schedule }: Props) {
 
             <div className="border-t border-gray-200 pt-3 grid gap-2">
                 {
-                    schedules.map((schedule, index) => (
+                    schedules.map((schedule) => (
                          <div className="flex gap-6">
                     <div className="">
                         <span className="text-sm text-gray-400">Horario de la semana</span>

@@ -7,9 +7,8 @@ import { Form } from "@/components/ui/form"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useModal } from "@/hooks/use-modal"
-import { Tag } from "@/lib/types/tag"
 import { cn } from "@/lib/utils"
-import { createCategory, getCategories } from "@/services/category.services"
+import { getCategories } from "@/services/category.services"
 import { productValidationSchema } from "@/validation/product"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
@@ -73,7 +72,7 @@ export default function FormProduct() {
                  client.invalidateQueries({queryKey: ['products']})
                 closeModal()
             },
-            onError: (error) => {
+            onError: (_error) => {
                                 
                 // toast.error('Error al guardar')
             }

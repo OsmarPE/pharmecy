@@ -1,4 +1,4 @@
-import { Box, Calendar, ChevronsLeftRight, ChevronUp, CircleDot, GalleryVerticalEnd, Home, LogOut, MapPin, Search, TagIcon, User2, User2Icon } from "lucide-react"
+import { Box, Calendar, ChevronsLeftRight, CircleDot, GalleryVerticalEnd, LogOut, MapPin, Search, TagIcon, User2Icon } from "lucide-react"
 
 import {
   Sidebar,
@@ -12,7 +12,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom"
+import {  NavLink, useLocation, useNavigate } from "react-router-dom"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { useQueryClient } from "@tanstack/react-query"

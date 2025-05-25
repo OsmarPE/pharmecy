@@ -1,6 +1,5 @@
 
 import { useQuery } from "@tanstack/react-query"
-import { useState } from "react"
 import { BranchSelect } from "./BranchSelect"
 import { getProductsByBranch } from "@/services/product.services"
 import { DataTableProducts } from "@/payments/data-table"

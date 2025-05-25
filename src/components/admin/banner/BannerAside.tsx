@@ -1,13 +1,14 @@
+import { cn } from "@/lib/utils";
 
 interface Props {
     children: React.ReactNode;
     className?: string;
-    modeEdit?: boolean;
+    
 }
 
-export default function BannerAside({ children, className = '', modeEdit }: Props) {
+export default function BannerAside({ children, className = '' }: Props) {
     return (
-        <aside className="grid gap-4 ">
+        <aside className={cn("grid gap-4 ", className)}>
                 {children}
         </aside>
     )

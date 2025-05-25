@@ -23,9 +23,7 @@ import { getBranchs } from "@/services/branch.services"
 import { useBranch } from "@/hooks/use-branch"
 
 
-interface Props{
-    filterByBranch: (branchId: number) => void
-}
+
 
 export function BranchSelect() {
   const [open, setOpen] = React.useState(false)

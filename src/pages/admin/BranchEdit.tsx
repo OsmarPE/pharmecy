@@ -10,7 +10,7 @@ import { ScheduleForm } from "@/lib/types/schedule";
 import { branchValidationSchema } from "@/validation/branch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Calendar, Clock, Locate, MapPin, Pencil, Phone, Plus, Trash } from "lucide-react";
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -21,7 +21,6 @@ import { formatTextSchedule, generateLocation } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
-import { LatLng } from "leaflet";
 import MapsBranch from "@/components/admin/branch/MapBranch";
 
 export default function BranchEdit() {
@@ -207,7 +206,7 @@ export default function BranchEdit() {
                 toast.success(message)
                 redirect('/admin/branchs',{replace: true})
             },
-            onError: (error) => {
+            onError: (_error) => {
                 toast.error('Error al guardar')
             }
         })

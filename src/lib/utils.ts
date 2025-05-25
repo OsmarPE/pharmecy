@@ -1,5 +1,5 @@
 import { clsx, type ClassValue } from "clsx"
-import { LatLng, LatLngBounds } from "leaflet"
+import { LatLng } from "leaflet"
 import { twMerge } from "tailwind-merge"
 import { Contact } from "./types/contact"
 import { ScheduleFilter, ScheduleWithBranch } from "./types/schedule"

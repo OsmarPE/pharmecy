@@ -6,7 +6,7 @@ import { Product, ProductByBranch } from "@/lib/types/product"
 import { Role } from "@/lib/types/rol"
 import { User } from "@/lib/types/user"
 import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, Barcode, Box, DollarSign, Image, Mail, MapPin, MoreHorizontal, Pencil, Tag, Trash, UserRound } from "lucide-react"
+import { ArrowUpDown, Barcode, Box, Mail, MapPin, MoreHorizontal, Pencil, Tag, Trash, UserRound } from "lucide-react"
 import { Link } from "react-router-dom"
 
 type PaymentCategory = {
@@ -23,13 +23,7 @@ type PaymentTag = {
   id: number
   name: string
 }
-type PaymentUser = {
-  id: string,
-  name: string,
-  email: string,
-  role: string,
-  password: string,
-}
+
 type PaymentProduct = {
   id: number;
   name: string;

@@ -11,18 +11,12 @@ import { ScheduleForm } from "@/lib/types/schedule"
 import { formatTextSchedule } from "@/lib/utils"
 import { scheduleValidationSchema } from "@/validation/schedule"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Calendar, Pencil, Plus, Trash } from "lucide-react"
+import { Calendar, Plus, Trash } from "lucide-react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 
-type scheduleType = {
-    dayFrom: string;
-    dayTo: string;
-    timeFrom: string;
-    timeTo: string;
-}
 
 export default function FormSchedule() {
 
@@ -48,7 +42,7 @@ export default function FormSchedule() {
 
     const { formState: { errors }, getValues, setValue, clearErrors, setError } = form;
 
-    const onSubmit = (data: z.infer<typeof scheduleValidationSchema>) => {
+    const onSubmit = (_data: z.infer<typeof scheduleValidationSchema>) => {
     
     }
 

@@ -181,7 +181,7 @@ export default function BranchAdd() {
                 toast.success(message)
                 redirect('/admin/branchs',{replace: true})
             },
-            onError: (error) => {
+            onError: (_error) => {
                 toast.error('Error al guardar')
             }
         })

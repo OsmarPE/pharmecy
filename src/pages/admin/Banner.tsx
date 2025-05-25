@@ -11,7 +11,7 @@ import { Banner as BannerProps } from "@/lib/types/banner";
 import { getBanners, updateBanner } from "@/services/banner.services";
 import { CircleAlert } from "lucide-react";
 import { DragEvent, useEffect, useMemo, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Banner() {

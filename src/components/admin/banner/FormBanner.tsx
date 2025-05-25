@@ -28,7 +28,7 @@ export default function FormBanner({ refetch }: Props) {
         },
     })
 
-    const onSubmit = async(data: z.infer<typeof bannerValidationSchema>) => {
+    const onSubmit = async(_data: z.infer<typeof bannerValidationSchema>) => {
         const formData = new FormData();
         formData.append("image", file as File);        
         const message = await createBanner(formData)

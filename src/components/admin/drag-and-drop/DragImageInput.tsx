@@ -21,7 +21,7 @@ interface imagenType {
     type: string
 }
 
-export default function DragImageInput({  message = '' , onChangeValue, value , file, onChangeFile }: Props) {
+export default function DragImageInput({  message = '' , onChangeValue, value , onChangeFile }: Props) {
 
 
     const [isDragging, setIsDragging] = useState(false);

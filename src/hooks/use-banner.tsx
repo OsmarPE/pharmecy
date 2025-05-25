@@ -1,6 +1,6 @@
 import { Banner } from '@/lib/types/banner'
 import { getBanners } from '@/services/banner.services'
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 
 export default function useBanner() {
   
@@ -15,6 +15,7 @@ export default function useBanner() {
           setLoading(false)
         })
         .catch((error) => {
+                  console.error(error)
                   })
     }, [])
 

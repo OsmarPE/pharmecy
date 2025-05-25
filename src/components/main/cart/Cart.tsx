@@ -1,8 +1,5 @@
-import { Link } from "react-router-dom"
-import { Button } from "../../ui/button"
 import { useCart } from "@/hooks/use-cart"
 import { useMemo } from "react"
-import CartItem from "./CartItem"
 import CartEmpty from "./CartEmpty"
 import CartHeader from "./CartHeader"
 import CartFooter from "./CartFooter"

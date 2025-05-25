@@ -3,7 +3,7 @@ import ProductError from "@/components/main/error/ProductError";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types/product";
 import { getProductById } from "@/services/product.services";
-import { ChevronLeft, ShoppingCart, Twitter, Facebook, Share2,  } from "lucide-react";
+import { ChevronLeft, ShoppingCart  } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "@/hooks/use-cart";

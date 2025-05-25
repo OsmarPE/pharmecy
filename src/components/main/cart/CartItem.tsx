@@ -8,14 +8,14 @@ interface Props{
 export default function CartItem({product}: Props) {
 
     const { addItem, removeItem, updateQuantity } = useCart()
-    const { name,priceBase,quantity,id,image,category,priceDiscount,price } = product
+    const { name,quantity,id,price,image } = product
 
         
     
     
     return (
         <div className="cart__item">
-            <img className="cart__image" src="https://www.emeritafarmacias.com/wp-content/uploads/8904103340372.png" alt="" />
+            <img className="cart__image" src={`${import.meta.env.VITE_API_URL}/${image}`} alt="" />
             <div className="cart__body">
                 <div className="cart__top">
                     <h5 className="cart__title">{name}</h5>

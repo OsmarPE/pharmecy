@@ -7,7 +7,7 @@ interface BranchStore {
 }
 
 
-export const useBranch = create<BranchStore>((set,get) => ({
+export const useBranch = create<BranchStore>((set) => ({
     branchId: 0,
     setBranchId: (branchId: number) => set({branchId}),
 }))

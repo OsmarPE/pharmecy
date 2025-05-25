@@ -3,7 +3,7 @@ import Banner from "@/components/main/Banner";
 import { QuoterPDF } from "@/components/main/QuoterPDF";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { ArrowDownToLine, Image, Minus, Plus, ScanLine } from "lucide-react";
 import { useMemo } from "react";
 

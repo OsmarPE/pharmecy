@@ -21,7 +21,7 @@ export default function Products() {
   const { data:categories , isLoading} = useQuery({ queryKey: ['categories'], queryFn: getCategories})
   const { data:products , isLoading:isLoadingProducts} = useQuery({ queryKey: ['products'], queryFn: getProducts})
   
-      const [locationCurrent, setlocationCurrent] = useState<LocationCurrent>({
+      const [_locationCurrent, setlocationCurrent] = useState<LocationCurrent>({
           latitude: null,
           longitude: null,
       })

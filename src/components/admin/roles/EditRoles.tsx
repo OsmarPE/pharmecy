@@ -47,7 +47,7 @@ export default function EditRoles() {
                 client.invalidateQueries({ queryKey: ['roles'] });
                 redirect();
             },
-            onError: (error) => {
+            onError: (_error) => {
                 toast.error("Error al actualizar el rol");
             }
         })

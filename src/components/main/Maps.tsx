@@ -1,16 +1,13 @@
 import { Branch } from "@/lib/types/branch";
 import { formatTextSchedule, generateContacts } from "@/lib/utils";
-import { LatLng } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Calendar, Map, MapPin, Phone, Route, Smartphone } from "lucide-react";
-import { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, GeoJSON } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 
 export default function Maps({ branch }: { branch: Branch[] }) {
 
-    const [positionCurrent, setPositionCurrent] = useState<LatLng | null>(null);
 
 
     const position: [number, number] = [20.9671, -89.5926]; // Coordenadas de ejemplo (Mérida, Yucatán)

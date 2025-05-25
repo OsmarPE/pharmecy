@@ -23,6 +23,7 @@ export default function Contacts() {
     })
 
     const onSubmit = (values: z.infer<typeof validationContact>) => {
+        console.log(values)
             }
 
     return (

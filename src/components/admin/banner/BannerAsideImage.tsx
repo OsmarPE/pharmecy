@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { AlignJustify, Trash } from "lucide-react";
-import { Link } from "react-router-dom";
+import { AlignJustify} from "lucide-react";
 
 interface Props {
     index: number;
@@ -16,9 +15,8 @@ interface Props {
     id: number;
 }
 
-console.log(import.meta.env.VITE_API_URL);
 
-export default function BannerAsideImage({ index, src, modeEdit, setIndexImg, indexImg, onDragStart, onDragEnter, onDragLeave, onDragOver, onDrop, id }: Props) {
+export default function BannerAsideImage({ index, src, modeEdit, setIndexImg, indexImg, onDragStart, onDragEnter, onDragLeave, onDragOver, onDrop}: Props) {
     return (
         <figure
         
