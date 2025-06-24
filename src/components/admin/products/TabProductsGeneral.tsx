@@ -13,7 +13,7 @@ import { getCategories } from '@/services/category.services';
 
 export default function TabProductsGeneral() {
 
-  const { data } = useQuery({ queryKey: ['products'], queryFn: getProducts })
+  const { data } = useQuery({ queryKey: ['products'], queryFn: () => getProducts()})
   const { id } = useIdParams("editid")
 
 
@@ -22,13 +22,13 @@ export default function TabProductsGeneral() {
   return (
    <>
        <div className="flex justify-between items-center gap-4 mb-4 mt-6">
-        <Button variant={'notion'}>
+        {/* <Button variant={'notion'}>
           <Filter />
           Filtrar
-        </Button>
+        </Button> */}
         <div className=" flex justify-end gap-4">
-          <Button variant={'notion'}> <CloudUpload /> Subir Excel</Button>
-          <Button variant={'notion'}> <Download /> Exportar </Button>
+          {/* <Button variant={'notion'}> <CloudUpload /> Subir Excel</Button> */}
+          {/* <Button variant={'notion'}> <Download /> Exportar </Button> */}
           <Modal>
             <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
             <ModalContent title="Agregar Producto" description="Crea un nuevo producto">

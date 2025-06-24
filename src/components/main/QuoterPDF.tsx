@@ -112,10 +112,10 @@ const styles = StyleSheet.create({
         fontSize: 10,
     },
     productId: {
-        width: '10%',
+        width: '20%',
     },
     productName: {
-        width: '40%',
+        width: '30%',
     },
     productQty: {
         width: '10%',
@@ -239,7 +239,7 @@ export function QuoterPDF({ products = [], total }: { products: CartItem[] , tot
             <View style={styles.table}>
                 {/* Encabezados de tabla */}
                 <View style={[styles.tableRow, { backgroundColor: '#dbeafe' }]}>
-                    <Text style={[styles.tableColHeader, styles.productId]}>Codigo</Text>
+                    <Text style={[styles.tableColHeader, styles.productId]}>SKU</Text>
                     <Text style={[styles.tableColHeader, styles.productName]}>Producto</Text>
                     <Text style={[styles.tableColHeader, styles.productQty]}>Cant.</Text>
                     <Text style={[styles.tableColHeader, styles.productPrice]}>Precio Unit.</Text>
@@ -249,7 +249,7 @@ export function QuoterPDF({ products = [], total }: { products: CartItem[] , tot
                 {/* Filas de productos */}
                 {products?.map((item) => (
                     <View style={styles.tableRow} key={item.id}>
-                        <Text style={[styles.tableCol, styles.productId]}>{item.id}</Text>
+                        <Text style={[styles.tableCol, styles.productId]}>{item.sku}</Text>
                         <Text style={[styles.tableCol, styles.productName]}>{item.name}</Text>
                         <Text style={[styles.tableCol, styles.productQty]}>{item.quantity}</Text>
                         <Text style={[styles.tableCol, styles.productPrice]}>${item.price}</Text>
