@@ -66,7 +66,7 @@ export default function EditUser() {
 
     return (
         <Modal defaultState={true}>
-            <ModalContent changeOpen={redirect} title="Agregar Usuario" description="Crea un nuevo usuario">
+            <ModalContent changeOpen={redirect} title="Editar Usuario" description="Edita la información del usuario">
           <div>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>

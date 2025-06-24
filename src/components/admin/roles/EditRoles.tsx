@@ -55,7 +55,7 @@ export default function EditRoles() {
 
     return (
         <Modal defaultState={true}>
-            <ModalContent changeOpen={redirect} title="Editar Rol" description="editar el rol">
+            <ModalContent changeOpen={redirect} title="Editar Rol" description="Edita la información del rol">
                 <div>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>

@@ -56,7 +56,7 @@ export default function EditCategory() {
 
     return (
         <Modal defaultState={true}>
-            <ModalContent changeOpen={redirect} title="Editar Rol" description="editar el rol">
+            <ModalContent changeOpen={redirect} title="Editar categoría" description="Edita la información de la categoría">
                 <div>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>

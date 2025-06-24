@@ -56,7 +56,7 @@ export default function EditTags() {
 
     return (
         <Modal defaultState={true}>
-            <ModalContent changeOpen={redirect} title="Editar Etiqueta" description="Editar la etiqueta">
+            <ModalContent changeOpen={redirect} title="Editar Etiqueta" description="Editar la información de la etiqueta">
                 <div>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>

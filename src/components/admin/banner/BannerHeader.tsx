@@ -22,7 +22,7 @@ export default function BannerHeader({ modeEdit, setModeEdit, refetch }: Props) 
                 {!modeEdit && (
                     <Modal>
                         <ModalButton variant="dashboard"> <CirclePlus /> Agregar</ModalButton>
-                        <ModalContent title="Agregar imagen" description="Crea una nueva imagen">
+                        <ModalContent title="Agregar banner" description="Crea la imagen que quieres mostrar en la pagina principal">
                             <FormBanner refetch={refetch} />
                         </ModalContent>
                     </Modal>
