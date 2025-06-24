@@ -42,6 +42,10 @@ export default function FormUser() {
                 toast.success(message)
                 client.invalidateQueries({ queryKey: ['users'] })
                 closeModal()
+            },
+            onError: (error) => {
+                console.log(error);
+                
             }
         })
     }
