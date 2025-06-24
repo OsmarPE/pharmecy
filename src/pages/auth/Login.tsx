@@ -9,6 +9,7 @@ import { validationLogin } from "@/validation/auth";
 import InputForm from "@/components/components-general/InputForm";
 import { login } from "@/services/user.services";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function Login() {
 
@@ -34,7 +35,7 @@ export default function Login() {
       navigate('/admin',{replace: true})
 
     } catch (error) {
-            
+          toast.error('Correo electronico o contraseña incorrectos')
     }
 
   }
@@ -56,7 +57,7 @@ export default function Login() {
                 <InputForm control={form.control} placeholder="Correo electronico" name="email" label="Correo electronico" />
               </div>
               <div className="">
-                <InputForm control={form.control} placeholder="Contraseña" name="password" label="Contraseña" />
+                <InputForm type="password" control={form.control} placeholder="Contraseña" name="password" label="Contraseña" />
               </div>
             </div>
             <Button type="submit" className="w-full mt-6">
