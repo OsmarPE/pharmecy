@@ -12,7 +12,8 @@ export default function CartDetails() {
     const { items, addItem, updateQuantity, getTotalPriceWithoutDiscount } = useCart()
 
     const totalPrice = useMemo(() => getTotalPriceWithoutDiscount(), [items])
-
+    console.log(items);
+    
   return (
     <>
     <Banner title="Cotizador" />

@@ -8,6 +8,7 @@ import ProductSkeleton from "@/components/main/skeleton/ProductSkeleton";
 import { getProducts } from "@/services/product.services";
 import { useEffect, useMemo, useState } from "react";
 import { AlertCircle } from "lucide-react";
+import Search from "@/components/main/Search";
 
 interface LocationCurrent {
   latitude: number | null,
@@ -19,7 +20,7 @@ export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryCurrent = searchParams.get('category') ?? ''
   const { data:categories , isLoading} = useQuery({ queryKey: ['categories'], queryFn: getCategories})
-  const { data:products , isLoading:isLoadingProducts} = useQuery({ queryKey: ['products'], queryFn: getProducts})
+  const { data:products , isLoading:isLoadingProducts} = useQuery({ queryKey: ['products'], queryFn: () => getProducts()})
   
       const [_locationCurrent, setlocationCurrent] = useState<LocationCurrent>({
           latitude: null,
@@ -61,6 +62,7 @@ export default function Products() {
                           <CategorySkeleton />
                         ) : (
                           <>
+                            <Search />
                             <h2 className="aside__subtitle">Categorías</h2>
                             <ul className="aside__list">
                                 {categories?.map((category, index) => (

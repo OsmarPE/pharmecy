@@ -3,7 +3,7 @@ import ProductError from "@/components/main/error/ProductError";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/types/product";
 import { getProductById } from "@/services/product.services";
-import { ChevronLeft, ShoppingCart  } from "lucide-react";
+import { ChevronLeft, Minus, Plus, ShoppingCart  } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "@/hooks/use-cart";
@@ -13,7 +13,7 @@ export default function ProductDetails() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const [product, setProduct] = useState<null | Product>(null)
-    const {  addItem } = useCart()
+    const {  addItem, getProductInCart, updateQuantity } = useCart()
 
     const fetchProduct = async () => {
         if (!id) return;
@@ -42,6 +42,9 @@ export default function ProductDetails() {
 
     const img = `${import.meta.env.VITE_API_URL}/${image}`
     
+
+    const quantity = getProductInCart(product.id)?.quantity ?? 0
+   
     return (
         <div className="product-details">
             <div className="container">
@@ -63,9 +66,13 @@ export default function ProductDetails() {
                         </p>
                         <div className="product-details__actions">
                             <div className="product-details__control">
-                                <button className="product-details__control-item">+</button>
-                                <div className="product-details__control-item">1</div>
-                                <button className="product-details__control-item">-</button>
+                                <button className="product-details__control-item" onClick={() => updateQuantity(product.id, quantity - 1)}>
+                                    <Minus width={16} height={16} />
+                                </button>
+                                <div className="product-details__control-item">{quantity}</div>
+                                <button className="product-details__control-item" onClick={() => addItem(product)}>
+                                    <Plus width={16} height={16} />
+                                </button>
                             </div> 
                             <Button onClick={() => addItem(product)} className="flex-1 h-12">Agregar al carrito <ShoppingCart /> </Button> 
                         </div>

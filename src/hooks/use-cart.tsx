@@ -14,7 +14,8 @@ interface CartStore {
   clearCart: () => void
   getTotalItems: () => number
   getTotalPrice: () => number,
-  getTotalPriceWithoutDiscount: () => number
+  getTotalPriceWithoutDiscount: () => number,
+  getProductInCart: (productId: number) => CartItem | null
 }
 
 export const useCart = create<CartStore>((set, get) => ({
@@ -82,5 +83,8 @@ export const useCart = create<CartStore>((set, get) => ({
       (total, item) => total + item.price * item.quantity,
       0
     )
+  },
+  getProductInCart: (productId: number) => {
+    return get().items.find(item => item.id === productId) ?? null
   },
 }))

@@ -19,7 +19,7 @@ import { z } from "zod"
 export default function AddBranchProduct() {
 
     const {  closeModal } = useModal()
-    const { data: products } = useQuery({ queryKey: ['products'], queryFn: getProducts })
+    const { data: products } = useQuery({ queryKey: ['products'], queryFn: () => getProducts()})
     const { branchId } = useBranch()
 
     const client = useQueryClient()

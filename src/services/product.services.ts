@@ -2,8 +2,9 @@ import { Product, ProductByBranch } from "@/lib/types/product"
 import { API } from "./api"
 import { AxiosError } from "axios"
 
-export const getProducts = async () => {
-    const { data } = await API.get<{message: Product[]}>("/product")
+export const getProducts = async (search?:string) => {
+    const params = search ? `?search=${search}` : ''
+    const { data } = await API.get<{message: Product[]}>(`/product${params}`)
     return data.message
 }
 

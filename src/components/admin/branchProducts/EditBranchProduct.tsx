@@ -64,7 +64,7 @@ interface PropsEditBranchProductBody {
 
 export function EditBranchProductBody({ product }: PropsEditBranchProductBody) {
 
-    const { data: products } = useQuery({ queryKey: ['products'], queryFn: getProducts })
+    const { data: products } = useQuery({ queryKey: ['products'], queryFn: () => getProducts() })
     const { id, redirect } = useIdParams("editproductid")
     const idCurrent = id ? id : ''
     const { branchId } = useBranch()
