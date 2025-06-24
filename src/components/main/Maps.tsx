@@ -4,13 +4,29 @@ import "leaflet/dist/leaflet.css";
 import { Calendar, Map, MapPin, Phone, Route, Smartphone } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Button } from "../ui/button";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 export default function Maps({ branch }: { branch: Branch[] }) {
 
+    const markerRefs = useRef<Array<L.Marker | null>>([])
 
+    const [searchParams] = useSearchParams()
+    const index = searchParams.get('index') ? +(searchParams.get('index') as string) : null
 
     const position: [number, number] = [20.9671, -89.5926]; // Coordenadas de ejemplo (Mérida, Yucatán)
+
+    useEffect(() => {
+        if (index === null) return
+        console.log(index);
+    
+        const primerMarker = markerRefs.current[index]
+        if (primerMarker) {
+            primerMarker.openPopup()
+        }
+     }, [index])
+
+
 
     return (
         <MapContainer center={position} zoom={13} style={{ height: "400px", width: "100%" }}>
@@ -23,8 +39,8 @@ export default function Maps({ branch }: { branch: Branch[] }) {
                 const { cel, tel } = generateContacts(item.contact ?? [])
 
                 return  (
-                    <Marker key={index} position={[item.location?.latitude as number, item.location?.longitude as number]}>
-                        <Popup  minWidth={200} > 
+                    <Marker ref={(el) => {markerRefs.current[index] = el}} key={index} position={[item.location?.latitude as number, item.location?.longitude as number]}>
+                        <Popup minWidth={200} > 
                             <div className="font-primary">
                                 <h3 className="text-lg font-medium">{item.name}</h3>
                                 <div className="py-2">

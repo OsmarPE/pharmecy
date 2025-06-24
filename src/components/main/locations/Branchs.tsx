@@ -8,8 +8,6 @@ export default function Branchs() {
 
     const { data } = useQuery({ queryKey: ['branchs'], queryFn: getBranchs })
 
-
-
     return (
         <section className="branch">
             <div className="container">
@@ -23,7 +21,7 @@ export default function Branchs() {
                             <ul className="contacts__list">
                                 {
                                     data?.map((item, index) => (
-                                        <BranchItem key={index} branch={item} />
+                                        <BranchItem key={index} branch={item} index={index} />
                                     ))
                                 }
                             </ul>
