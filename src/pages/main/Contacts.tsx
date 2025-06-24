@@ -45,7 +45,7 @@ export default function Contacts() {
                                         <InputForm control={form.control} placeholder="Nombre" name="name" label="Nombre" />
                                     </div>
                                     <div className="form__item">
-                                        <InputForm control={form.control} placeholder="Teléfono" name="phone" label="Teléfono" />
+                                        <InputForm control={form.control} placeholder="Email" name="email" label="Email" />
                                     </div>
                                 </div>
                                 <div className="form__row">
