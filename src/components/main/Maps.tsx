@@ -6,6 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Button } from "../ui/button";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import L from "leaflet";
 
 export default function Maps({ branch }: { branch: Branch[] }) {
 
@@ -27,6 +28,8 @@ export default function Maps({ branch }: { branch: Branch[] }) {
      }, [index])
 
 
+     const Icon = L.icon({ iconUrl: '/marker.svg', iconSize: [25, 41], iconAnchor: [12, 41] })
+
 
     return (
         <MapContainer center={position} zoom={13} style={{ height: "400px", width: "100%" }}>
@@ -39,7 +42,7 @@ export default function Maps({ branch }: { branch: Branch[] }) {
                 const { cel, tel } = generateContacts(item.contact ?? [])
 
                 return  (
-                    <Marker ref={(el) => {markerRefs.current[index] = el}} key={index} position={[item.location?.latitude as number, item.location?.longitude as number]}>
+                    <Marker icon={Icon} ref={(el) => {markerRefs.current[index] = el}} key={index} position={[item.location?.latitude as number, item.location?.longitude as number]}>
                         <Popup minWidth={200} > 
                             <div className="font-primary">
                                 <h3 className="text-lg font-medium">{item.name}</h3>

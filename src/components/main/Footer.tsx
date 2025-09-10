@@ -7,6 +7,7 @@ const links: {name: string, to: string}[] = [
     { name: 'Sucursales', to: '/branches' },
     { name: 'Bolsa de Trabajo', to: '/branches' },
     { name: 'Contacto', to: '/contacts' },
+    { name: 'Iniciar sesión', to: '/auth' },
 ]
 
 export default function Footer() {

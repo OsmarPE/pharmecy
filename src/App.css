@@ -490,6 +490,7 @@ button{
 .footer__link{
     padding: .875rem 0;
     font-size: .875rem;
+    display: inline-block;
     width: 100%;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
