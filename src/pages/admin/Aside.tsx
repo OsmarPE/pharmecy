@@ -104,7 +104,7 @@ export function Aside() {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton className="h-12 gap-3 font-medium">
                   <Avatar className="size-10 text-lg ">
-                    <AvatarFallback className="bg-gray-100 text-gray-500">A</AvatarFallback>
+                    <AvatarFallback className="text-gray-500">A</AvatarFallback>
                   </Avatar>
                   Administrador
                   <ChevronsLeftRight className="ml-auto text-gray-400 rotate-90" />

@@ -130,6 +130,7 @@ button{
     display: none;
 }
 
+
 .header.scroll .main-nav__link::after{
     background-color: var(--color-black-100);
 }
@@ -163,6 +164,7 @@ button{
 .main-nav__link{
     position: relative;
     padding: 1rem 0.5rem;
+    display: inline-block;
 }
 
 .main-nav__link::after{
@@ -851,6 +853,12 @@ button{
     display: grid;
     gap: 1.5rem;
     grid-template-columns: 1fr 280px;
+}
+@media screen and (width < 768px){
+    .main-branch__grid,.branch__grid{
+        grid-template-columns: 1fr;
+    }
+    
 }
 .contacts{
     max-height: 400px;

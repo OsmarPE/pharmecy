@@ -17,7 +17,7 @@ export default function ProtectedRoutes({ children }: { children: React.ReactNod
     useEffect(() => {
         verifyToken()
         .then(data => {
-                        if (data.status === 'success') {
+            if (data.status === 'success') {
                 setAuth(true)
             }
         }).catch(() => {

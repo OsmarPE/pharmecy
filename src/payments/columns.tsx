@@ -257,7 +257,7 @@ export const usersColumns: ColumnDef<User>[] = [
       return (
         <div className="flex items-center gap-3">
           {/* <UserRound width={14} /> */}
-          <div className="flex items-center justify-center size-8 text-sm text-gray-500 font-medium rounded-full bg-gray-100">
+          <div className="flex items-center justify-center size-8 text-sm text-gray-500 font-medium rounded-full bg-gray-50">
             {payment.name.charAt(0).toUpperCase()}
           </div>
           {payment.name}

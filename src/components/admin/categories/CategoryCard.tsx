@@ -11,7 +11,7 @@ interface Props extends Category {
 
 export default function CategoryCard({ name, id }: Props) {
   return (
-    <article className="p-2 flex justify-between gap-4 shadow  rounded-md border border-gray-300 items-center">
+    <article className="p-2 flex justify-between gap-4 shadow  rounded-md border border-black/20 items-center">
       <div className="flex items-center gap-4">
         <div className="bg-gray-50 size-10 rounded-md text-gray-500 flex items-center justify-center">
           <Box width={16} height={16} />

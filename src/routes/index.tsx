@@ -27,6 +27,7 @@ const BranchAdd = lazy(() => import('@/pages/admin/BranchAdd'))
 const Banner = lazy(() => import('@/pages/admin/Banner'))
 const BranchEdit = lazy(() => import('@/pages/admin/BranchEdit'))
 const CartDetails = lazy(() => import('@/pages/main/CartDetails'))
+import '@/App.css'
 export default function index() {
 
   const routes = createBrowserRouter([

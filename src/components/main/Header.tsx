@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Cart from './cart/Cart'
 import CartButton from './cart/CartButton'
+import { MenuIcon } from 'lucide-react'
 
 const links: {name: string, to: string}[] = [
     { name: 'Inicio', to: '/' },
@@ -78,7 +79,9 @@ export default function Header() {
                             </ul>
                         </nav>
                        <CartButton setshowCart={setshowCart} />
-                        <label className="header__btn" role="button" htmlFor="menu">x</label>
+                        <label className="header__btn" role="button" htmlFor="menu">
+                            <MenuIcon />
+                        </label>
                     </div>
                 </div>
             </div>
