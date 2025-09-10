@@ -12,8 +12,7 @@ export default function CartDetails() {
     const { items, addItem, updateQuantity, getTotalPriceWithoutDiscount } = useCart()
 
     const totalPrice = useMemo(() => getTotalPriceWithoutDiscount(), [items])
-    console.log(items);
-    
+
   return (
     <>
     <Banner title="Cotizador" />
@@ -77,10 +76,10 @@ export default function CartDetails() {
                     </ul>
                    
                         <Button asChild className="w-full mt-6" size={'lg'}>
-                    <PDFDownloadLink document={<QuoterPDF products={items} total={totalPrice} />} fileName="cotizacion.pdf">
+                    {items.length > 0 && <PDFDownloadLink document={<QuoterPDF products={items} total={totalPrice} />} fileName="cotizacion.pdf">
                             <ArrowDownToLine size={20} />
                             Generar cotizacion
-                    </PDFDownloadLink>
+                    </PDFDownloadLink>}
                     
                         </Button>
                 </aside>
