@@ -2,6 +2,7 @@ import { LatLng } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents, Popup } from "react-leaflet";
+import L from "leaflet";
 
 interface Props {
   positionValue?: LatLng | null;
@@ -12,6 +13,9 @@ export default function MapsBranch({ positionValue = null, setPositionValue }: P
   const [positionCurrent, setPositionCurrent] = useState<LatLng | null>(positionValue); // Almacena las coordenadas del clic
   const position: [number, number] = [20.9671, -89.5926]; // Centro del mapa (Mérida, Yucatán)
     
+  const Icon = L.icon({ iconUrl: '/marker.svg', iconSize: [25, 41], iconAnchor: [12, 41] })
+  
+  
   return (
     <div>
       <MapContainer center={position} zoom={13} style={{ height: "400px", width: "100%" }}>
@@ -20,7 +24,7 @@ export default function MapsBranch({ positionValue = null, setPositionValue }: P
           attribution='© <a href="https://www.carto.com/">CARTO</a>'
         />
         {positionCurrent && (
-          <Marker position={positionCurrent}>
+          <Marker position={positionCurrent} icon={Icon}>
             <Popup>Lat: {positionCurrent.lat.toFixed(4)}, Lng: {positionCurrent.lng.toFixed(4)}</Popup>
           </Marker>
         )}
